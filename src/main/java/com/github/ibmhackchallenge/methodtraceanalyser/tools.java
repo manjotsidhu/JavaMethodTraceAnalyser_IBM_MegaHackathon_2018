@@ -21,8 +21,17 @@ public class tools {
     
     public static int find(ArrayList arr, int startLength, int number) {
         for(int iteration = startLength; iteration < arr.size(); iteration++) {
-            if(arr.get(iteration) == number) {
-                return number;
+            if(arr.get(iteration).equals(number)) {
+                return iteration;
+            }
+        }
+        return 0;
+    }
+    
+    public static int find(ArrayList arr, int startLength, String number) {
+        for(int iteration = startLength; iteration < arr.size(); iteration++) {
+            if(arr.get(iteration).equals(number)) {
+                return iteration;
             }
         }
         return 0;

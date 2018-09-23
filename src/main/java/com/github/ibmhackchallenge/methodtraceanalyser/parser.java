@@ -18,9 +18,7 @@ package com.github.ibmhackchallenge.methodtraceanalyser;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.regex.*;
 import org.apache.commons.io.FileUtils;
 
@@ -28,7 +26,7 @@ public class parser {
 
     /**
      * Parses the given log file and returns a ArrayList containing all
-     * necessary data for analyser to compare logs.
+     * necessary data for analser to compare logs.
      *
      * @param logFile input log belonging to File Object
      * @return ArrayList of parsed log
@@ -37,18 +35,12 @@ public class parser {
     public static ArrayList parse(File logFile) throws IOException {
         ArrayList parsedLog = new ArrayList();
 
-        ArrayList methodTimeline = new ArrayList();
-        ArrayList methodTime = new ArrayList();
-        //ArrayList execEnv = new ArrayList();
-        //ArrayList traceApp = new ArrayList();
-        ArrayList methodText = new ArrayList();
-        ArrayList methodSequence = new ArrayList();
+        ArrayList<LocalTime> methodTime = new ArrayList<>();
+        ArrayList<String> methodText = new ArrayList<>();
+        ArrayList<Integer> methodSequence = new ArrayList<>();
 
-        parsedLog.add(methodTimeline);
         parsedLog.add(methodTime);
-        //parsedLog.add(execEnv);
-        //parsedLog.add(traceApp);
-        parsedLog.add(methodText);
+        parsedLog.add(methodText); 
         parsedLog.add(methodSequence);
 
         System.out.println("Parsing file: " + logFile.getAbsolutePath());
@@ -58,49 +50,34 @@ public class parser {
         Matcher matcher1 = pattern1.matcher(log);
 
         int methodId = 0;
-        ArrayList<Integer> IdBuffer = new ArrayList<>();
-
+        ArrayList<Integer> BufferId = new ArrayList<>();
+            
         while (matcher1.find()) {
-            methodTimeline.add(matcher1.group(1));
+            methodTime.add(LocalTime.parse(matcher1.group(1)));
             
-            //methodTime.add(methodTimeline.get(tools.find(methodTimeline, methodId, methodId)));
+            methodTime.add(methodTime.get(tools.find(methodSequence, methodId, methodId)));
             
-            //execEnv.add(matcher1.group(3));
-            //traceApp.add(matcher1.group(5));
             methodText.add(matcher1.group(9));
 
             switch (matcher1.group(7)) {
                 case "0":
                     methodId++;
-                    IdBuffer.add(methodId);
+                    BufferId.add(methodId);
                     methodSequence.add(methodId);
                     System.out.println("Found method, " + matcher1.group(9) +
                             " assigning method id: " + methodId);
                     break;
                 case "1":
-                    methodSequence.add(IdBuffer.get(IdBuffer.size() - 1));
-                    IdBuffer.remove(IdBuffer.size() - 1);
+                    methodSequence.add(BufferId.get(BufferId.size() - 1));
+                    BufferId.remove(BufferId.size() - 1);
                     break;
-                default:
-                    methodSequence.add("null");
-                    break;
+                //default:
+                //    methodSequence.add(0);
+                //    break;
             }
 
         }
         System.out.println("Methods found " + (int) (methodId));
         return parsedLog;
-    }
-
-    public static void main(String[] args) throws IOException {
-        File in = new File("sample_logs/input.log");
-        System.out.println(Arrays.deepToString(parse(in).toArray()));
-        
-        LocalTime one = LocalTime.parse("03:35:59.196");
-        LocalTime two = LocalTime.parse("03:35:59.197");
-        System.out.println("03:35:59.196");
-        System.out.println(one.getHour()+" " + one.getMinute() + " " + one.getSecond() + " " + one.getNano());
-        
-        Long sub = ChronoUnit..between(one,two);
-        System.out.println(sub);
     }
 }
