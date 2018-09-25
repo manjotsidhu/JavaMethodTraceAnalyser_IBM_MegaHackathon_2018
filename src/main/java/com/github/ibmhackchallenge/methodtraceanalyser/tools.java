@@ -36,4 +36,13 @@ public class tools {
         }
         return 0;
     }
+    
+    public static int find(Object[] arr, int startLength, String number) {
+        for(int iteration = startLength; iteration < arr.length; iteration++) {
+            if(arr[iteration].equals(number)) {
+                return iteration;
+            }
+        }
+        return 0;
+    }
 }

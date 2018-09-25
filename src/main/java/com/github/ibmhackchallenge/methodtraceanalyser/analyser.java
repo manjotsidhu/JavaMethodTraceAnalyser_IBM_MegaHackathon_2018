@@ -22,15 +22,17 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The heart of method trace analyser
+ * @author manjotsidhu
+ */
 public class analyser {
 
     ArrayList analysedTime = new ArrayList();
     ArrayList analysedTimeMethods = new ArrayList();
-    ArrayList analysedTimeDiff = new ArrayList();
 
     analyser(ArrayList<String> files) throws IOException {
         analysedTime.add(analysedTimeMethods);
-        analysedTime.add(analysedTimeDiff);
 
         for (String file : files) {
             ArrayList parsedLog = parser.parse(new File(file));
@@ -38,41 +40,56 @@ public class analyser {
         }
     }
 
+    /**
+     * Analysis for time taken by every method of every log.
+     * 
+     * @param parsedLog Log returned by the parser class {@link com.github.ibmhackchallenge.methodtraceanalyser.parser}
+     */
     public void analyseTime(ArrayList parsedLog) {
-        ArrayList parsedTime = (ArrayList) parsedLog.get(0);
-        ArrayList parsedText = (ArrayList) parsedLog.get(0);
-        ArrayList parsedSequence = (ArrayList) parsedLog.get(0);
+        ArrayList<String> parsedTime = (ArrayList<String>) parsedLog.get(0);
+        ArrayList parsedText = (ArrayList) parsedLog.get(1);
+        ArrayList parsedSequence = (ArrayList) parsedLog.get(2);
+        ArrayList results = new ArrayList();
         Integer nMethods = parsedSequence.size() / 2;
 
         for (int iteration = 1; iteration <= nMethods; iteration++) {
             int firstIndex = tools.find(parsedSequence, 0, iteration);
             int secondIndex = tools.find(parsedSequence, firstIndex, iteration);
 
-            long timeTaken = ChronoUnit.MILLIS.between(LocalTime.parse((String) (parsedTime.get(secondIndex))), LocalTime.parse((String) (parsedTime.get(firstIndex))));
+            System.out.println(parsedTime.get(firstIndex) + " " + parsedTime.get(secondIndex));
+            long timeTaken = ChronoUnit.MILLIS.between(LocalTime.parse(parsedTime.get(firstIndex)), LocalTime.parse(parsedTime.get(secondIndex)));
             Integer methodOccur = tools.find(analysedTimeMethods, 0, (String) parsedText.get(firstIndex));
             
-            if(methodOccur == 0) {
+            if (methodOccur == 0 | (results.size() > methodOccur && results.get(methodOccur)!= null)) {
                 analysedTimeMethods.add(parsedText.get(firstIndex));
+                results.add(timeTaken);
             } else {
-                
+                results.add(methodOccur, timeTaken);
             }
         }
+        analysedTime.add(results);
+    }
+    
+    /**
+     * Returns the results of analysed method {@link com.github.ibmhackchallenge.methodtraceanalyser.analyser#analyseTime(ArrayList parsedLog)}
+     * which is stored in a private variable.
+     * @return ArrayList analysedTime
+     */
+    public ArrayList getAnalysedTime() {
+        return analysedTime;
     }
 
+    /**
+     * For testing purpose only.
+     * 
+     * @param args null
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
-        File in = new File("sample_logs/input.log");
-        ArrayList my = parser.parse(in);
-        System.out.println(Arrays.deepToString(my.toArray()));
-
-        //System.out.println(((ArrayList) my.get(0)).get(0).toString());
-        LocalTime t1 = LocalTime.parse("03:35:59.195");
-        LocalTime t2 = LocalTime.parse("03:36:59.196");
-
-        long minutesBetween = ChronoUnit.MINUTES.between(t1, t2);
-        long hoursBetween = ChronoUnit.HOURS.between(t1, t2);
-        long secsBetween = ChronoUnit.SECONDS.between(t1, t2);
-        long msecsBetween = ChronoUnit.MILLIS.between(t1, t2);
-        long nsecsBetween = ChronoUnit.NANOS.between(t1, t2);
-        System.out.println(minutesBetween + "\n" + hoursBetween + "\n" + secsBetween + "\n" + msecsBetween + "\n" + nsecsBetween + "\n");
+        ArrayList<String> in = new ArrayList<>();
+        in.add("sample_logs/input.log");
+        
+        analyser an = new analyser(in);
+        System.out.println(Arrays.deepToString(an.getAnalysedTime().toArray()));
     }
 }

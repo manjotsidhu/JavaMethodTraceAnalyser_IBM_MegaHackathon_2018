@@ -17,7 +17,6 @@ package com.github.ibmhackchallenge.methodtraceanalyser;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.regex.*;
 import org.apache.commons.io.FileUtils;
@@ -35,7 +34,7 @@ public class parser {
     public static ArrayList parse(File logFile) throws IOException {
         ArrayList parsedLog = new ArrayList();
 
-        ArrayList<LocalTime> methodTime = new ArrayList<>();
+        ArrayList<String> methodTime = new ArrayList<>();
         ArrayList<String> methodText = new ArrayList<>();
         ArrayList<Integer> methodSequence = new ArrayList<>();
 
@@ -53,7 +52,7 @@ public class parser {
         ArrayList<Integer> BufferId = new ArrayList<>();
             
         while (matcher1.find()) {
-            methodTime.add(LocalTime.parse(matcher1.group(1)));
+            methodTime.add(matcher1.group(1));
             
             methodTime.add(methodTime.get(tools.find(methodSequence, methodId, methodId)));
             
