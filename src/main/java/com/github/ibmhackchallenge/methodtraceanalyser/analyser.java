@@ -28,8 +28,8 @@ import java.util.Arrays;
  */
 public class analyser {
 
-    ArrayList analysedTime = new ArrayList();
-    ArrayList analysedTimeMethods = new ArrayList();
+    private final ArrayList analysedTime = new ArrayList();
+    private final ArrayList analysedTimeMethods = new ArrayList();
 
     analyser(ArrayList<String> files) throws IOException {
         analysedTime.add(analysedTimeMethods);
@@ -45,7 +45,7 @@ public class analyser {
      * 
      * @param parsedLog Log returned by the parser class {@link com.github.ibmhackchallenge.methodtraceanalyser.parser}
      */
-    public void analyseTime(ArrayList parsedLog) {
+    private void analyseTime(ArrayList parsedLog) {
         ArrayList<String> parsedTime = (ArrayList<String>) parsedLog.get(0);
         ArrayList parsedText = (ArrayList) parsedLog.get(1);
         ArrayList parsedSequence = (ArrayList) parsedLog.get(2);
@@ -78,7 +78,7 @@ public class analyser {
     public ArrayList getAnalysedTime() {
         return analysedTime;
     }
-
+    
     /**
      * For testing purpose only.
      * 
