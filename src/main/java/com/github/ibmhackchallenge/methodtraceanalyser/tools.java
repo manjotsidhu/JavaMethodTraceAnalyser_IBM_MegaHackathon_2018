@@ -19,9 +19,9 @@ import java.util.ArrayList;
 
 public class tools {
     
-    public static int find(ArrayList arr, int startLength, int number) {
+    public static int find(ArrayList<Integer> arr, int startLength, int number) {
         for(int iteration = startLength; iteration < arr.size(); iteration++) {
-            if(arr.get(iteration).equals(number)) {
+            if(arr.get(iteration) == number) {
                 return iteration;
             }
         }

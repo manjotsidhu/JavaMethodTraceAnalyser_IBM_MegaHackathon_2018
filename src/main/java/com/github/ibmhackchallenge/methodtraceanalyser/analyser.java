@@ -51,10 +51,10 @@ public class analyser {
         ArrayList parsedSequence = (ArrayList) parsedLog.get(2);
         ArrayList results = new ArrayList();
         Integer nMethods = parsedSequence.size() / 2;
-
+        
         for (int iteration = 1; iteration <= nMethods; iteration++) {
             int firstIndex = tools.find(parsedSequence, 0, iteration);
-            int secondIndex = tools.find(parsedSequence, firstIndex, iteration);
+            int secondIndex = tools.find(parsedSequence, firstIndex+1, iteration);
 
             System.out.println(parsedTime.get(firstIndex) + " " + parsedTime.get(secondIndex));
             long timeTaken = ChronoUnit.MILLIS.between(LocalTime.parse(parsedTime.get(firstIndex)), LocalTime.parse(parsedTime.get(secondIndex)));

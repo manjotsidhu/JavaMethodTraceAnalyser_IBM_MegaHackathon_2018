@@ -52,10 +52,7 @@ public class parser {
         ArrayList<Integer> BufferId = new ArrayList<>();
             
         while (matcher1.find()) {
-            methodTime.add(matcher1.group(1));
-            
-            methodTime.add(methodTime.get(tools.find(methodSequence, methodId, methodId)));
-            
+            methodTime.add(matcher1.group(1));            
             methodText.add(matcher1.group(9));
 
             switch (matcher1.group(7)) {
