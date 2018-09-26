@@ -39,7 +39,7 @@ public class parser {
         ArrayList<Integer> methodSequence = new ArrayList<>();
 
         parsedLog.add(methodTime);
-        parsedLog.add(methodText); 
+        parsedLog.add(methodText);
         parsedLog.add(methodSequence);
 
         System.out.println("Parsing file: " + logFile.getAbsolutePath());
@@ -50,9 +50,9 @@ public class parser {
 
         int methodId = 0;
         ArrayList<Integer> BufferId = new ArrayList<>();
-            
+
         while (matcher1.find()) {
-            methodTime.add(matcher1.group(1));            
+            methodTime.add(matcher1.group(1));
             methodText.add(matcher1.group(9));
 
             switch (matcher1.group(7)) {
@@ -60,8 +60,8 @@ public class parser {
                     methodId++;
                     BufferId.add(methodId);
                     methodSequence.add(methodId);
-                    System.out.println("Found method, " + matcher1.group(9) +
-                            " assigning method id: " + methodId);
+                    System.out.println("Found method, " + matcher1.group(9)
+                            + " assigning method id: " + methodId);
                     break;
                 case "1":
                     methodSequence.add(BufferId.get(BufferId.size() - 1));
