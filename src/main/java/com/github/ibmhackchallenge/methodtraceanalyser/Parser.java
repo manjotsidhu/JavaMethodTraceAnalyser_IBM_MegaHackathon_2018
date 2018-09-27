@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.regex.*;
 import org.apache.commons.io.FileUtils;
 
-public class parser {
+public class Parser {
 
     /**
      * Parses the given log file and returns a ArrayList containing all

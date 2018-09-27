@@ -18,7 +18,7 @@ package com.github.ibmhackchallenge.methodtraceanalyser;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class tools {
+public class Tools {
 
     /**
      * Finds the specified <code>number</code> in an <code>arr</code> starting

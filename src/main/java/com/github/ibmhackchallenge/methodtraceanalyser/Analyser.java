@@ -27,17 +27,17 @@ import java.util.Arrays;
  *
  * @author manjotsidhu
  */
-public class analyser {
+public class Analyser {
 
     private final ArrayList analysedTime = new ArrayList();
     private final ArrayList analysedTimeMethods = new ArrayList();
     private final ArrayList analysedNMethods = new ArrayList();
 
-    analyser(ArrayList<String> files) throws IOException {
+    Analyser(ArrayList<String> files) throws IOException {
         analysedTime.add(analysedTimeMethods);
 
         for (String file : files) {
-            ArrayList parsedLog = parser.parse(new File(file));
+            ArrayList parsedLog = Parser.parse(new File(file));
 
             ArrayList<String> parsedTime = (ArrayList<String>) parsedLog.get(0);
             ArrayList parsedText = (ArrayList) parsedLog.get(1);
@@ -65,11 +65,11 @@ public class analyser {
         ArrayList results = new ArrayList();
 
         for (int iteration = 1; iteration <= nMethods; iteration++) {
-            int firstIndex = tools.find(parsedSequence, 0, iteration);
-            int secondIndex = tools.find(parsedSequence, firstIndex + 1, iteration);
+            int firstIndex = Tools.find(parsedSequence, 0, iteration);
+            int secondIndex = Tools.find(parsedSequence, firstIndex + 1, iteration);
 
             long timeTaken = ChronoUnit.MILLIS.between(LocalTime.parse(parsedTime.get(firstIndex)), LocalTime.parse(parsedTime.get(secondIndex)));
-            Integer methodOccur = tools.find(analysedTimeMethods, 0, (String) parsedText.get(firstIndex));
+            Integer methodOccur = Tools.find(analysedTimeMethods, 0, (String) parsedText.get(firstIndex));
 
             if (methodOccur == 0 | (results.size() > methodOccur && results.get(methodOccur) != null)) {
                 analysedTimeMethods.add(parsedText.get(firstIndex));
@@ -102,12 +102,12 @@ public class analyser {
      * {@link com.github.ibmhackchallenge.methodtraceanalyser.parser}
      */
     private void analyseNMethods(ArrayList parsedText, ArrayList parsedSequence) {
-        String[] methods = tools.removeDuplicates(analysedTimeMethods);
+        String[] methods = Tools.removeDuplicates(analysedTimeMethods);
         ArrayList results = new ArrayList();
 
         for (int iteration = 1; iteration <= methods.length; iteration++) {
-            int timeIndex = tools.find(parsedSequence, 0, iteration);
-            results.add(tools.find(methods, 0, (String) parsedText.get(timeIndex)), tools.count(parsedText, (String) parsedText.get(timeIndex)));
+            int timeIndex = Tools.find(parsedSequence, 0, iteration);
+            results.add(Tools.find(methods, 0, (String) parsedText.get(timeIndex)), Tools.count(parsedText, (String) parsedText.get(timeIndex)));
         }
 
         analysedNMethods.add(methods);
@@ -134,7 +134,7 @@ public class analyser {
         ArrayList<String> in = new ArrayList<>();
         in.add("sample_logs/input.log");
 
-        analyser an = new analyser(in);
+        Analyser an = new Analyser(in);
         System.out.println(Arrays.deepToString(an.getanalysedNMethods().toArray()));
     }
 }

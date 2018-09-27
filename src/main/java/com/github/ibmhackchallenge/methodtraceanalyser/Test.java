@@ -17,7 +17,7 @@ package com.github.ibmhackchallenge.methodtraceanalyser;
 
 import java.time.LocalTime;
 
-public class test {
+public class Test {
     public static void main(String[] args) {
         String time = "03:35:59.195";
         
