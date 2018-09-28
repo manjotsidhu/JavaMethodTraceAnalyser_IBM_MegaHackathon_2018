@@ -137,7 +137,7 @@ public class Analyser {
     private void analyseCodeFlow(ArrayList parsedText, ArrayList<Integer> parsedSequence) throws IOException {
         CodeFlow frame = new CodeFlow(parsedText, parsedSequence);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(900, 720);
+        frame.setSize(600, 520);
         frame.setVisible(true);
         
     }

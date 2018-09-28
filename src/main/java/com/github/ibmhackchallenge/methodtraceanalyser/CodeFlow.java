@@ -39,14 +39,16 @@ public class CodeFlow extends JFrame {
             Map<String, Object> style = graph.getStylesheet().getDefaultEdgeStyle();
             style.put(mxConstants.STYLE_EDGE, mxEdgeStyle.SegmentConnector);
 
-            int xOffset = 20;
-            int yOffset = 20;
+            int xOffset = 15;
+            int yOffset = 15;
+            int xMultiplier = 0;
 
             for (int itr = 1; itr < parsedText.size(); itr++) {
-                Object v1 = graph.insertVertex(parent, null, parsedText.get(itr-1), xOffset + (130 * parsedSequence.get(itr-1)), yOffset, ((String) parsedText.get(itr-1)).length() * 6.5,
+                Object v1 = graph.insertVertex(parent, null, parsedText.get(itr-1), xOffset + (xMultiplier * parsedSequence.get(itr-1)), yOffset, ((String) parsedText.get(itr-1)).length() * 6.5,
                         30);
-                yOffset = yOffset + 60;
-                Object v2 = graph.insertVertex(parent, null, parsedText.get(itr), xOffset + (130 * parsedSequence.get(itr)), yOffset, ((String) parsedText.get(itr)).length() * 6.5,
+                xMultiplier = (itr == 1) ? 90 : xMultiplier;
+                yOffset = yOffset + 50;
+                Object v2 = graph.insertVertex(parent, null, parsedText.get(itr), xOffset + (xMultiplier * parsedSequence.get(itr)), yOffset, ((String) parsedText.get(itr)).length() * 6.5,
                                 30);
                 graph.insertEdge(parent, null, "", v1, v2, mxConstants.EDGESTYLE_TOPTOBOTTOM);
                 
