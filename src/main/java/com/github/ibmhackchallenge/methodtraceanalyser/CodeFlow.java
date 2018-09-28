@@ -44,14 +44,16 @@ public class CodeFlow extends JFrame {
             int xMultiplier = 0;
 
             for (int itr = 1; itr < parsedText.size(); itr++) {
-                Object v1 = graph.insertVertex(parent, null, parsedText.get(itr-1), xOffset + (xMultiplier * parsedSequence.get(itr-1)), yOffset, ((String) parsedText.get(itr-1)).length() * 6.5,
+                xMultiplier = (itr == 2) ? 0 : xMultiplier;
+                Object v1 = graph.insertVertex(parent, null, parsedText.get(itr-1), xOffset + (xMultiplier * (parsedSequence.get(itr-1)-1)), yOffset, ((String) parsedText.get(itr-1)).length() * 6.5,
                         30);
-                xMultiplier = (itr == 1) ? 90 : xMultiplier;
+                xMultiplier = (itr == 2) ? 100 : xMultiplier;
+                
                 yOffset = yOffset + 50;
-                Object v2 = graph.insertVertex(parent, null, parsedText.get(itr), xOffset + (xMultiplier * parsedSequence.get(itr)), yOffset, ((String) parsedText.get(itr)).length() * 6.5,
+                Object v2 = graph.insertVertex(parent, null, parsedText.get(itr), xOffset + (xMultiplier * (parsedSequence.get(itr)-1)), yOffset, ((String) parsedText.get(itr)).length() * 6.5,
                                 30);
                 graph.insertEdge(parent, null, "", v1, v2, mxConstants.EDGESTYLE_TOPTOBOTTOM);
-                
+                xMultiplier = (itr == 1) ? 100 : xMultiplier;
             }
 
         } finally {
