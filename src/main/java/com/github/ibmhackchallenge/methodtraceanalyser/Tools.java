@@ -98,11 +98,14 @@ public class Tools {
      * @param arr ArrayList< String > input array.
      * @return new array having unique elements.
      */
-    public static String[] removeDuplicates(ArrayList<String> arr) {
-        String[] newArr = new String[arr.size()];
-        arr.toArray(newArr);
-        newArr = Arrays.stream(newArr).distinct().toArray(String[]::new);
+    public static ArrayList removeDuplicates(ArrayList<String> arr) {
+        String[] tempArr = new String[arr.size()];
+        ArrayList<String> newArr = new ArrayList<>();
+        
+        arr.toArray(tempArr);
+        tempArr = Arrays.stream(tempArr).distinct().toArray(String[]::new);
 
+        newArr.addAll(Arrays.asList(tempArr));
         return newArr;
     }
 }
