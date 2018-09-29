@@ -141,19 +141,4 @@ public class Analyser {
         frame.setVisible(true);
         
     }
-
-    /**
-     * For testing purpose only.
-     *
-     * @param args null
-     * @throws IOException
-     */
-    public static void main(String[] args) throws IOException {
-        ArrayList<String> in = new ArrayList<>();
-        in.add("sample_logs/log1");
-        in.add("sample_logs/log2");
-
-        Analyser an = new Analyser(in); 
-        //System.out.println(Arrays.deepToString(an.getanalysedNMethods().toArray()));
-    }
 }

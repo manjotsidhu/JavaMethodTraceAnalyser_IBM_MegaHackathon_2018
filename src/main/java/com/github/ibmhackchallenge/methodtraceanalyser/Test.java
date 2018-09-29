@@ -15,14 +15,16 @@
  */
 package com.github.ibmhackchallenge.methodtraceanalyser;
 
-import java.time.LocalTime;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Test {
-    public static void main(String[] args) {
-        String time = "03:35:59.195";
-        
-        LocalTime t = LocalTime.parse(time);
-        
-        System.out.println(t.getHour() + ":" + t.getMinute() + ":" + t.getSecond() + "." + (int)(t.getNano()/1000000));
+    public static void main(String[] args) throws IOException {
+        ArrayList<String> in = new ArrayList<>();
+        in.add("sample_logs/log1");
+        in.add("sample_logs/log2");
+
+        Analyser an = new Analyser(in); 
+        //System.out.println(Arrays.deepToString(an.getanalysedNMethods().toArray()));
     }
 }
