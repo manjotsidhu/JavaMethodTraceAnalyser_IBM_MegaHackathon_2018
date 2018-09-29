@@ -34,12 +34,12 @@ public class Analyser {
     private final ArrayList analysedTimeMethods = new ArrayList();
     private final ArrayList analysedNMethods = new ArrayList();
 
-    Analyser(ArrayList<String> files) throws IOException {
+    Analyser(File[] files) throws IOException {
         analysedTime.add(analysedTimeMethods);
         boolean firstItr = true;
 
-        for (String file : files) {
-            ArrayList parsedLog = Parser.parse(new File(file));
+        for (File file : files) {
+            ArrayList parsedLog = Parser.parse(file);
 
             ArrayList<String> parsedTime = (ArrayList<String>) parsedLog.get(0);
             ArrayList parsedText = (ArrayList) parsedLog.get(1);
