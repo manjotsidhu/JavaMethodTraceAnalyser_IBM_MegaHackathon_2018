@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.JFrame;
 
 /**
  * The heart of method trace analyser
@@ -34,6 +32,7 @@ public class Analyser {
     private final ArrayList<Integer> analysedBufferMethods = new ArrayList();
     private final ArrayList analysedTimeMethods = new ArrayList();
     private final ArrayList analysedNMethods = new ArrayList();
+    private final ArrayList<String> logFiles = new ArrayList();
 
     Analyser(File[] files) throws IOException {
         analysedTime.add(analysedTimeMethods);
@@ -50,6 +49,7 @@ public class Analyser {
             analyseTime(nMethods, parsedTime, parsedText, parsedSequence);
             analyseNMethods(parsedText, parsedSequence, analysedTimeMethods, firstItr);
             analyseCodeFlow(parsedText, parsedSequence);
+            logFiles.add(file.getName());
             firstItr = false;
         }
     }
@@ -131,6 +131,15 @@ public class Analyser {
      */
     public ArrayList getanalysedNMethods() {
         return analysedNMethods;
+    }
+    
+    /**
+     * returns list of log file names.
+     * 
+     * @return ArrayList of Strings 
+     */
+    public ArrayList<String> getLogFiles() {
+        return logFiles;
     }
 
     /**
