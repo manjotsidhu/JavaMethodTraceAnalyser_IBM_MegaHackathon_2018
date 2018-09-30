@@ -92,10 +92,10 @@ public class Analyser {
      * {@link com.github.ibmhackchallenge.methodtraceanalyser.analyser#analyseTime(ArrayList parsedLog)}
      * which is stored in a private variable.
      *
-     * @return Object[] analysedTime
+     * @return ArrayList analysedTime
      */
-    public Object[] getAnalysedTime() {
-        return analysedTime.toArray();
+    public ArrayList getAnalysedTime() {
+        return analysedTime;
     }
 
     /**
@@ -127,10 +127,10 @@ public class Analyser {
      * getanalysedNMethods returns the results of analyseNMethods
      * {@link com.github.ibmhackchallenge.methodtraceanalyser.analyser#analyseNMethods(ArrayList parsedText, ArrayList parsedSequence)}
      *
-     * @return Object[] analysedNMethods
+     * @return ArrayList analysedNMethods
      */
-    public Object[] getanalysedNMethods() {
-        return analysedNMethods.toArray();
+    public ArrayList getanalysedNMethods() {
+        return analysedNMethods;
     }
 
     /**
