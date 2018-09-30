@@ -22,6 +22,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,6 +33,7 @@ public class Main extends javax.swing.JFrame {
     Analyser analyse;
     File[] logFiles;
     DefaultListModel<File> filesList = new DefaultListModel<>();
+    File SampleLogFilesFolder = new File("./sample_logs");
 
     /**
      * Creates new form MainAlt
@@ -380,6 +383,7 @@ public class Main extends javax.swing.JFrame {
             // File Chooser (Browse Tab)
             JFileChooser chooser = new JFileChooser();
             chooser.setMultiSelectionEnabled(true);
+            chooser.setCurrentDirectory(SampleLogFilesFolder);
             chooser.showOpenDialog(GUI_main_panel);
             logFiles = chooser.getSelectedFiles();
             filesList = new DefaultListModel<>();
@@ -403,7 +407,11 @@ public class Main extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-        graphicalView();
+        String arrData[][] = {{"Vinod","100"},{"Raju","200"},{"Ranju","300"}};
+        String arrHeadings[] = {"Name","code"};
+        String arrHeadingTooltips[] = {"Name","code"};
+        
+        graphicalView(arrData, arrHeadings, arrHeadingTooltips);
     }//GEN-LAST:event_analyseBtnActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -416,17 +424,24 @@ public class Main extends javax.swing.JFrame {
         resetInputForm();
     }//GEN-LAST:event_formWindowOpened
     
-    private void graphicalView() {
+    private void graphicalView(String[][] arrData, String[] arrHeadings, String[] arrHeadingTooltips) {
             // jPanel_Tab_TabularGraphicView.setEnabled(true);   
             jTabbedPaneMain.setEnabledAt(1, true);
             // TABLE    
             ArrayList analysedTime = analyse.getAnalysedTime();
+            
+            DefaultTableModel model = new DefaultTableModel(arrData,arrHeadings);
+            jTable1.setModel(model); //= new JTable(model);
+            
+            
+            /*
             for(int itr1 = 0; itr1 < analysedTime.size(); itr1++) {
                 for(int itr2 = 0; itr2 < ((ArrayList) analysedTime.get(itr1)).size(); itr2++) {
                     System.out.print("|" + ((ArrayList) analysedTime.get(itr1)).get(itr2) + "|");
                 }
                 System.out.println();
             }
+            */
     }
     
     private void resetInputForm() {
