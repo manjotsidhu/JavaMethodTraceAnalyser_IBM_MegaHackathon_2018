@@ -122,13 +122,13 @@ public class Tools {
      *
      */
     public static Object[][] toArray(ArrayList arr, int y) {
-        Object[][] newArr = new Object[arr.size()][y];
+        Object[][] newArr = new Object[y][arr.size()];
         
         for(int i = 0; i < arr.size(); i++) {
             for(int j = 0; j < ((ArrayList) arr.get(i)).size(); j++) {
-                newArr[i][j] = ((ArrayList) arr.get(i)).get(j);
+                newArr[j][i] = ((ArrayList) arr.get(i)).get(j);
             }
         }
-        return null;
+        return newArr;
     }
 }
