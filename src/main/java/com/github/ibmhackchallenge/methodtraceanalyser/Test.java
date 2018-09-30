@@ -25,8 +25,24 @@ public class Test {
         File[] in = new File[2];
         in[0] = new File("sample_logs/log1");
         in[1] = new File("sample_logs/log3");
+        
+        ArrayList a = new ArrayList();
+        ArrayList a1 = new ArrayList();
+        ArrayList a2 = new ArrayList();
+        a.add(a1);
+        a.add(a2);
+        a1.add(1);
+        a1.add(2);
+        a2.add(3);
+        a2.add(4);
+        
+        System.out.println(Arrays.deepToString(a.toArray()));
+        Object[][] r = Tools.toArray(a, 2);
+        
+        System.out.println(Arrays.deepToString(r));
 
-        Analyser an = new Analyser(in); 
-        System.out.println(Arrays.deepToString(an.getAnalysedTime().toArray()));
+        //Analyser an = new Analyser(in); 
+        //System.out.println(an.getAnalysedTime()[0]);
+        //System.out.println(Arrays.deepToString(an.getAnalysedTime());
     }
 }
