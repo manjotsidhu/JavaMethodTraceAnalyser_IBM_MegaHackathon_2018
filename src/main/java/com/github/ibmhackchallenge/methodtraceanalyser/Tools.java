@@ -73,7 +73,7 @@ public class Tools {
         }
         return 0;
     }
-    
+
     public static int find(ArrayList<Integer> arr1, ArrayList<String> arr2, int startIndex, Integer number, String str) {
         for (int iteration = startIndex; iteration < arr1.size(); iteration++) {
             if ((arr1.get(iteration) == number) && (arr2.get(iteration) == str)) {
@@ -110,11 +110,25 @@ public class Tools {
     public static ArrayList removeDuplicates(ArrayList<String> arr) {
         String[] tempArr = new String[arr.size()];
         ArrayList<String> newArr = new ArrayList<>();
-        
+
         arr.toArray(tempArr);
         tempArr = Arrays.stream(tempArr).distinct().toArray(String[]::new);
 
         newArr.addAll(Arrays.asList(tempArr));
         return newArr;
+    }
+
+    /**
+     *
+     */
+    public static Object[][] toArray(ArrayList arr, int y) {
+        Object[][] newArr = new Object[arr.size()][y];
+        
+        for(int i = 0; i < arr.size(); i++) {
+            for(int j = 0; j < ((ArrayList) arr.get(i)).size(); j++) {
+                newArr[i][j] = ((ArrayList) arr.get(i)).get(j);
+            }
+        }
+        return null;
     }
 }
