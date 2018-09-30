@@ -31,6 +31,7 @@ import javax.swing.JFrame;
 public class Analyser {
 
     private final ArrayList analysedTime = new ArrayList();
+    private final ArrayList<Integer> analysedBufferMethods = new ArrayList();
     private final ArrayList analysedTimeMethods = new ArrayList();
     private final ArrayList analysedNMethods = new ArrayList();
 
@@ -73,14 +74,15 @@ public class Analyser {
             int secondIndex = Tools.find(parsedSequence, firstIndex + 1, iteration);
 
             long timeTaken = ChronoUnit.MILLIS.between(LocalTime.parse(parsedTime.get(firstIndex)), LocalTime.parse(parsedTime.get(secondIndex)));
-            Integer methodOccur = Tools.find(analysedTimeMethods, 0, (String) parsedText.get(firstIndex));
-
-            if (methodOccur == 0 | (results.size() > methodOccur && results.get(methodOccur) != null)) {
+            
+            if(analysedBufferMethods.contains((Integer) parsedSequence.get(firstIndex)) && analysedTimeMethods.contains((String) parsedText.get(firstIndex))) {
+                int methodOccur = Tools.find(analysedBufferMethods, analysedTimeMethods, 0, (Integer) parsedSequence.get(firstIndex), (String) parsedText.get(firstIndex));
+                results.add(methodOccur, timeTaken);
+            } else {
+                analysedBufferMethods.add((Integer) parsedSequence.get(firstIndex));
                 analysedTimeMethods.add(parsedText.get(firstIndex));
                 results.add(timeTaken);
-            } else {
-                results.add(methodOccur, timeTaken);
-            }
+            }           
         }
         analysedTime.add(results);
     }
@@ -108,8 +110,8 @@ public class Analyser {
     private void analyseNMethods(ArrayList parsedText, ArrayList parsedSequence, ArrayList analysedTimeMethods, boolean firstItr) {
         ArrayList results = new ArrayList();
         ArrayList<String> methods = (firstItr) ? Tools.removeDuplicates(analysedTimeMethods) : (ArrayList<String>) analysedNMethods.get(0);
-        
-        if(firstItr) {
+
+        if (firstItr) {
             analysedNMethods.add(methods);
         }
 
@@ -130,15 +132,15 @@ public class Analyser {
     public ArrayList getanalysedNMethods() {
         return analysedNMethods;
     }
-    
+
     /**
      * Testing purpose only
      */
     private void analyseCodeFlow(ArrayList parsedText, ArrayList<Integer> parsedSequence) throws IOException {
-        CodeFlow frame = new CodeFlow(parsedText, parsedSequence);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 520);
-        frame.setVisible(true);
-        
+        //CodeFlow frame = new CodeFlow(parsedText, parsedSequence);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setSize(600, 520);
+        //frame.setVisible(true);
+
     }
 }

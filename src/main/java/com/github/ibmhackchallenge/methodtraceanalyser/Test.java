@@ -15,16 +15,18 @@
  */
 package com.github.ibmhackchallenge.methodtraceanalyser;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Test {
     public static void main(String[] args) throws IOException {
-        ArrayList<String> in = new ArrayList<>();
-        in.add("sample_logs/log1");
-        in.add("sample_logs/log2");
+        File[] in = new File[2];
+        in[0] = new File("sample_logs/log1");
+        in[1] = new File("sample_logs/log3");
 
         Analyser an = new Analyser(in); 
-        //System.out.println(Arrays.deepToString(an.getanalysedNMethods().toArray()));
+        System.out.println(Arrays.deepToString(an.getAnalysedTime().toArray()));
     }
 }

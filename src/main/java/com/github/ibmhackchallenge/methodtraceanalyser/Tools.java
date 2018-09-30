@@ -73,6 +73,15 @@ public class Tools {
         }
         return 0;
     }
+    
+    public static int find(ArrayList<Integer> arr1, ArrayList<String> arr2, int startIndex, Integer number, String str) {
+        for (int iteration = startIndex; iteration < arr1.size(); iteration++) {
+            if ((arr1.get(iteration) == number) && (arr2.get(iteration) == str)) {
+                return iteration;
+            }
+        }
+        return 0;
+    }
 
     /**
      * Counts the number of <code>element</code> in the given <code>arr</code>.
