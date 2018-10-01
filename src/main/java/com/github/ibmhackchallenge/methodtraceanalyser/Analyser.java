@@ -28,6 +28,11 @@ import java.util.ArrayList;
  */
 public class Analyser {
 
+    private final ArrayList anomalies = new ArrayList();
+    private final ArrayList anomaliesType = new ArrayList();
+    private final ArrayList anomaliesMethod = new ArrayList();
+    private final ArrayList anomaliesTime = new ArrayList();
+
     private final ArrayList analysedTime = new ArrayList();
     private final ArrayList<Integer> analysedBufferMethods = new ArrayList();
     private final ArrayList analysedTimeMethods = new ArrayList();
@@ -35,7 +40,11 @@ public class Analyser {
     private final ArrayList<String> logFiles = new ArrayList();
 
     Analyser(File[] files) throws IOException {
+        anomalies.add(anomaliesType);
+        anomalies.add(anomaliesMethod);
+        anomalies.add(anomaliesTime);
         analysedTime.add(analysedTimeMethods);
+        logFiles.add("Methods");
         boolean firstItr = true;
 
         for (File file : files) {
@@ -50,6 +59,7 @@ public class Analyser {
             analyseNMethods(parsedText, parsedSequence, analysedTimeMethods, firstItr);
             analyseCodeFlow(parsedText, parsedSequence);
             logFiles.add(file.getName());
+            if(! firstItr) findAnomalies(parsedSequence);
             firstItr = false;
         }
     }
@@ -74,15 +84,15 @@ public class Analyser {
             int secondIndex = Tools.find(parsedSequence, firstIndex + 1, iteration);
 
             long timeTaken = ChronoUnit.MILLIS.between(LocalTime.parse(parsedTime.get(firstIndex)), LocalTime.parse(parsedTime.get(secondIndex)));
-            
-            if(analysedBufferMethods.contains((Integer) parsedSequence.get(firstIndex)) && analysedTimeMethods.contains((String) parsedText.get(firstIndex))) {
+
+            if (analysedBufferMethods.contains((Integer) parsedSequence.get(firstIndex)) && analysedTimeMethods.contains((String) parsedText.get(firstIndex))) {
                 int methodOccur = Tools.find(analysedBufferMethods, analysedTimeMethods, 0, (Integer) parsedSequence.get(firstIndex), (String) parsedText.get(firstIndex));
                 results.add(methodOccur, timeTaken);
             } else {
                 analysedBufferMethods.add((Integer) parsedSequence.get(firstIndex));
                 analysedTimeMethods.add(parsedText.get(firstIndex));
                 results.add(timeTaken);
-            }           
+            }
         }
         analysedTime.add(results);
     }
@@ -132,11 +142,11 @@ public class Analyser {
     public ArrayList getanalysedNMethods() {
         return analysedNMethods;
     }
-    
+
     /**
      * returns list of log file names.
-     * 
-     * @return ArrayList of Strings 
+     *
+     * @return ArrayList of Strings
      */
     public ArrayList<String> getLogFiles() {
         return logFiles;
@@ -151,5 +161,52 @@ public class Analyser {
         //frame.setSize(600, 520);
         //frame.setVisible(true);
 
+    }
+
+    /**
+     * Anomalies
+     */
+    private void findAnomalies(ArrayList parsedSequence) {
+        String[] templates = new String[2];
+        templates[0] = "Method Time Variation";
+        templates[1] = "Method Missing Variation";
+
+        // method time variation
+        Object[][] time = Tools.toArray(getAnalysedTime(), ((ArrayList) getAnalysedTime().get(0)).size());
+        int TimeAnomaly = 0;
+        Object anomalyMethod = "";
+        Object anomalyTimeTook = "";
+
+        for (int i = 0; i < time.length; i++) {
+            for (Object[] sub : time) {
+                if (Tools.anomaly(sub, 1) != 0) {
+                    TimeAnomaly = Tools.anomaly(sub, 1);
+                    anomalyMethod = sub[0];
+                    anomalyTimeTook = sub[TimeAnomaly];
+                }
+            }
+        }
+
+        if (TimeAnomaly != 0) {
+            anomaliesType.add(0);
+            anomaliesMethod.add(anomalyMethod);
+            anomaliesTime.add(anomalyTimeTook);
+        }
+        
+        // Methods Variation
+        int methodMissingAnomaly = 0;
+        int methodAdditionalAnomaly = 0;
+        
+        //if(Tools.removeDuplicates(parsedSequence).size() != parsedSequence.size()/2) {
+            //if(Tools.removeDuplicates(parsedSequence).size() < parsedSequence.size()/2) {
+                
+            //} else {
+                
+            //}
+        //}
+    }
+
+    public ArrayList getAnomalies() {
+        return anomalies;
     }
 }

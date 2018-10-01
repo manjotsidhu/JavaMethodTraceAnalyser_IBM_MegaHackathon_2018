@@ -117,18 +117,44 @@ public class Tools {
         newArr.addAll(Arrays.asList(tempArr));
         return newArr;
     }
-
+        
     /**
      *
      */
     public static Object[][] toArray(ArrayList arr, int y) {
         Object[][] newArr = new Object[y][arr.size()];
-        
-        for(int i = 0; i < arr.size(); i++) {
-            for(int j = 0; j < ((ArrayList) arr.get(i)).size(); j++) {
+
+        for (int i = 0; i < arr.size(); i++) {
+            for (int j = 0; j < ((ArrayList) arr.get(i)).size(); j++) {
                 newArr[j][i] = ((ArrayList) arr.get(i)).get(j);
             }
         }
         return newArr;
+    }
+
+    /**
+     *
+     */
+    public static int anomaly(Object[] arr, int startIndex) {
+
+        int flag = 0;
+
+        for (int i = startIndex; i < arr.length; i++) {
+            for (int j = startIndex; j < arr.length; j++) {
+                if (i != j) {
+                    if (arr[i] != arr[j]) {
+                        flag = 1;
+                    } else {
+                        flag = 0;
+                        break;
+                    }
+                }
+            }
+            if (flag == 1) {
+                return i;
+            }
+        }
+
+        return 0;
     }
 }

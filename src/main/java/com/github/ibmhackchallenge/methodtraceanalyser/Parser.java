@@ -34,6 +34,7 @@ public class Parser {
     public static ArrayList parse(File logFile) throws IOException {
         ArrayList parsedLog = new ArrayList();
 
+        ArrayList<Integer> eventType = new ArrayList<>();
         ArrayList<String> methodTime = new ArrayList<>();
         ArrayList<String> methodText = new ArrayList<>();
         ArrayList<Integer> methodSequence = new ArrayList<>();
@@ -41,6 +42,7 @@ public class Parser {
         parsedLog.add(methodTime);
         parsedLog.add(methodText);
         parsedLog.add(methodSequence);
+        parsedLog.add(eventType);
 
         System.out.println("Parsing file: " + logFile.getAbsolutePath());
         String log = FileUtils.readFileToString(logFile);
@@ -54,19 +56,30 @@ public class Parser {
         while (matcher1.find()) {
             methodTime.add(matcher1.group(1));
             methodText.add(matcher1.group(9));
+            eventType.add(Integer.parseInt(matcher1.group(7)));
 
-            switch (matcher1.group(7)) {
-                case "0":
+            switch (eventType.get(eventType.size()-1)) {
+                case 0:
                     methodId++;
                     BufferId.add(methodId);
                     methodSequence.add(methodId);
                     System.out.println("Found method, " + matcher1.group(9)
                             + " assigning method id: " + methodId);
                     break;
-                case "1":
+                    
+                case 1:
                     methodSequence.add(BufferId.get(BufferId.size() - 1));
                     BufferId.remove(BufferId.size() - 1);
                     break;
+                    
+                //case 3:
+                //    Pattern eventPattern = Pattern.compile("Event\\sid\\s(\\d+),\\stext\\s=(.+)");
+                //    Matcher matchEvent = eventPattern.matcher(methodText.get(methodText.size()-1));
+                //    if(matchEvent.find()) {
+                //        methodSequence.add(Integer.parseInt(matchEvent.group(1)));
+                //        methodText.add(methodText.size()-1, matchEvent.group(2));
+                //    }
+                //    break;
                 //default:
                 //    methodSequence.add(0);
                 //    break;

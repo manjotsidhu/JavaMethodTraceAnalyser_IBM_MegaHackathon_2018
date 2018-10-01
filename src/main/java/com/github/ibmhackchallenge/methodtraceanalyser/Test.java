@@ -23,8 +23,12 @@ import java.util.Arrays;
 public class Test {
     public static void main(String[] args) throws IOException {
         File[] in = new File[2];
-        in[0] = new File("sample_logs/log1");
-        in[1] = new File("sample_logs/log3");
+        in[0] = new File("sample_logs/logfile1a");
+        //in[1] = new File("sample_logs/logfile1b");
+        in[1] = new File("sample_logs/logfile1c");
+        
+        //Parser parse = new Parser();
+        //System.out.println(Arrays.deepToString(parse.parse(in[2]).toArray()));
         
         ArrayList a = new ArrayList();
         ArrayList a1 = new ArrayList();
@@ -36,13 +40,16 @@ public class Test {
         a2.add(3);
         a2.add(4);
         
-        System.out.println(Arrays.deepToString(a.toArray()));
-        Object[][] r = Tools.toArray(a, 2);
+        //System.out.println(Arrays.deepToString(a.toArray()));
         
-        System.out.println(Arrays.deepToString(r));
 
-        //Analyser an = new Analyser(in); 
-        //System.out.println(an.getAnalysedTime()[0]);
+        Analyser an = new Analyser(in);
+        System.out.println(Arrays.deepToString(an.getAnomalies().toArray()));
+        //Object[][] r = Tools.toArray(an.getAnalysedTime(), ((ArrayList) an.getAnalysedTime().get(0)).size());
+        
+        //System.out.println(Arrays.deepToString(r));
+        //System.out.println(Arrays.deepToString(an.getAnalysedTime().toArray()));
+        //System.out.println(Arrays.deepToString(an.getLogFiles().toArray()));
         //System.out.println(Arrays.deepToString(an.getAnalysedTime());
     }
 }
