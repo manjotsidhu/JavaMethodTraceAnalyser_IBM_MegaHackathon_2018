@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The heart of method trace analyser
@@ -39,10 +40,10 @@ public class Analyser {
     private final ArrayList analysedTime = new ArrayList();
     private final ArrayList<Integer> analysedBufferMethods = new ArrayList();
     private final ArrayList analysedTimeMethods = new ArrayList();
-    
+
     private final ArrayList graphAnalysedTime = new ArrayList();
     private final ArrayList graphAnalysedTimeMethods = new ArrayList();
-    
+
     private final ArrayList analysedNMethods = new ArrayList();
     private final ArrayList<String> logFiles = new ArrayList();
 
@@ -70,7 +71,7 @@ public class Analyser {
             analyseCodeFlow(parsedText, parsedSequence);
             logFiles.add(file.getName());
             if (!firstItr) {
-                findAnomalies(parsedSequence);
+                findAnomalies(parsedSequence, parsedTime);
             }
             firstItr = false;
         }
@@ -109,7 +110,7 @@ public class Analyser {
                     graphAnalysedTimeMethods.add(parsedText.get(firstIndex));
                 }
                 analysedBufferMethods.add((Integer) parsedSequence.get(firstIndex));
-        
+
                 results.add(timeTaken);
             }
         }
@@ -127,10 +128,10 @@ public class Analyser {
     public ArrayList getAnalysedTime() {
         return analysedTime;
     }
-    
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public ArrayList getGraphAnalysedTime() {
         return graphAnalysedTime;
@@ -183,10 +184,11 @@ public class Analyser {
     public ArrayList<Integer> getLogSequence() {
         return logSequence;
     }
-    
+
     public ArrayList getLogText() {
         return logText;
     }
+
     /**
      * Testing purpose only
      */
@@ -201,38 +203,53 @@ public class Analyser {
     /**
      * Anomalies
      */
-    private void findAnomalies(ArrayList parsedSequence) {
+    private void findAnomalies(ArrayList parsedSequence, ArrayList parsedTime) {
         String[] templates = new String[2];
         templates[0] = "Method Time Variation";
         templates[1] = "Method Missing Variation";
 
-        // method time variation
-        Object[][] time = Tools.toArray(getAnalysedTime(), ((ArrayList) getAnalysedTime().get(0)).size());
-        int TimeAnomaly = 0;
-        Object anomalyMethod = "";
-        Object anomalyTimeTook = "";
+        // Methods Variation
+        int methodMissingAnomaly = 0;
+        Object missingMethod = "";
+        Object missingAt = "";
 
-        for (int i = 0; i < time.length; i++) {
-            for (Object[] sub : time) {
-                if (Tools.anomaly(sub, 1) != 0) {
-                    TimeAnomaly = Tools.anomaly(sub, 1);
-                    anomalyMethod = sub[0];
-                    anomalyTimeTook = sub[TimeAnomaly];
-                }
+        Object[][] method = Tools.toArray(logText, ((ArrayList) logText.get(0)).size());
+        System.out.println(Arrays.deepToString(method));
+        for (Object[] sub : method) {
+            //System.out.println(Tools.anomaly(sub, 0));
+            if (Tools.anomaly(sub, 0) != 0) {
+                methodMissingAnomaly = Tools.anomaly(sub, 0);
+                missingMethod = sub[methodMissingAnomaly];
+                missingAt = parsedTime.get(methodMissingAnomaly);
             }
         }
 
-        if (TimeAnomaly != 0) {
-            anomaliesType.add(templates[0]);
-            anomaliesMethod.add(anomalyMethod);
-            anomaliesTime.add(anomalyTimeTook);
+        if (methodMissingAnomaly != 0) {
+            anomaliesType.add(templates[1]);
+            anomaliesMethod.add(missingMethod);
+            anomaliesTime.add(missingAt);
         }
 
-        // Methods Variation
-        int methodMissingAnomaly = 0;
-        int methodAdditionalAnomaly = 0;
+        // method time variation
+        Object[][] time = Tools.toArray(getAnalysedTime(), ((ArrayList) getAnalysedTime().get(0)).size());
+        int TimeAnomaly = 0;
+        Object timeMethod = "";
+        Object timeTook = "";
 
-        
+        for (Object[] sub : time) {
+            if (Tools.anomaly(sub, 1) != 0) {
+                TimeAnomaly = Tools.anomaly(sub, 1);
+                timeMethod = sub[0];
+                timeTook = sub[TimeAnomaly];
+            }
+        }
+
+        if (TimeAnomaly != 0 && methodMissingAnomaly == 0) {
+            anomaliesType.add(templates[0]);
+            anomaliesMethod.add(timeMethod);
+            anomaliesTime.add(timeTook);
+        }
+
     }
 
     public ArrayList getAnomalies() {
