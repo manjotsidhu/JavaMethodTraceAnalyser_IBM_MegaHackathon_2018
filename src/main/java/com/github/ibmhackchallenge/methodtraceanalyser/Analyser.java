@@ -59,7 +59,9 @@ public class Analyser {
             analyseNMethods(parsedText, parsedSequence, analysedTimeMethods, firstItr);
             analyseCodeFlow(parsedText, parsedSequence);
             logFiles.add(file.getName());
-            if(! firstItr) findAnomalies(parsedSequence);
+            if (!firstItr) {
+                findAnomalies(parsedSequence);
+            }
             firstItr = false;
         }
     }
@@ -89,8 +91,13 @@ public class Analyser {
                 int methodOccur = Tools.find(analysedBufferMethods, analysedTimeMethods, 0, (Integer) parsedSequence.get(firstIndex), (String) parsedText.get(firstIndex));
                 results.add(methodOccur, timeTaken);
             } else {
+                if (analysedTimeMethods.contains((String) parsedText.get(firstIndex))) {
+                    analysedTimeMethods.add(parsedText.get(firstIndex) + " #" + iteration);
+                } else {
+                    analysedTimeMethods.add(parsedText.get(firstIndex));
+                }
                 analysedBufferMethods.add((Integer) parsedSequence.get(firstIndex));
-                analysedTimeMethods.add(parsedText.get(firstIndex));
+        
                 results.add(timeTaken);
             }
         }
@@ -192,17 +199,15 @@ public class Analyser {
             anomaliesMethod.add(anomalyMethod);
             anomaliesTime.add(anomalyTimeTook);
         }
-        
+
         // Methods Variation
         int methodMissingAnomaly = 0;
         int methodAdditionalAnomaly = 0;
-        
+
         //if(Tools.removeDuplicates(parsedSequence).size() != parsedSequence.size()/2) {
-            //if(Tools.removeDuplicates(parsedSequence).size() < parsedSequence.size()/2) {
-                
-            //} else {
-                
-            //}
+        //if(Tools.removeDuplicates(parsedSequence).size() < parsedSequence.size()/2) {
+        //} else {
+        //}
         //}
     }
 
