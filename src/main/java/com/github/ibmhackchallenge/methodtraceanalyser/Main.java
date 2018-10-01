@@ -35,7 +35,7 @@ public class Main extends javax.swing.JFrame {
     File[] logFiles;
     DefaultListModel<File> filesList = new DefaultListModel<>();
     File SampleLogFilesFolder = new File("./sample_logs");
-
+        
     /**
      * Creates new form MainAlt
      */
@@ -74,7 +74,15 @@ public class Main extends javax.swing.JFrame {
         jPanel_InputForm_buttons = new javax.swing.JPanel();
         resetBtn = new javax.swing.JButton();
         analyseBtn = new javax.swing.JButton();
-        jPanel_tab_1 = new javax.swing.JPanel();
+        jPanel_tab_Anomalies = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jPanel_tab_MethodTimeInvocation = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
@@ -82,7 +90,7 @@ public class Main extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jPanel_tab_2 = new javax.swing.JPanel();
+        jPanel_tab_MethodExecutionNumberOfTimes = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
@@ -90,7 +98,6 @@ public class Main extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jPanel_tab_3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         GUI_top_panel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -305,7 +312,76 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPaneMain.addTab("Input trace logs", jPanel_tab_home);
 
-        jPanel_tab_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel_tab_Anomalies.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setText("Anomalies");
+        jPanel16.add(jLabel7);
+
+        jLabel8.setText("Showing anomalies");
+        jPanel17.add(jLabel8);
+
+        jPanel18.setMaximumSize(null);
+        jPanel18.setMinimumSize(null);
+
+        jScrollPane3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable3.setMaximumSize(null);
+        jTable3.setMinimumSize(null);
+        jTable3.setName(""); // NOI18N
+        jTable3.setPreferredSize(null);
+        jScrollPane3.setViewportView(jTable3);
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel_tab_AnomaliesLayout = new javax.swing.GroupLayout(jPanel_tab_Anomalies);
+        jPanel_tab_Anomalies.setLayout(jPanel_tab_AnomaliesLayout);
+        jPanel_tab_AnomaliesLayout.setHorizontalGroup(
+            jPanel_tab_AnomaliesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel_tab_AnomaliesLayout.setVerticalGroup(
+            jPanel_tab_AnomaliesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_tab_AnomaliesLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPaneMain.addTab("Anomalies", jPanel_tab_Anomalies);
+
+        jPanel_tab_MethodTimeInvocation.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Method time invocation");
@@ -352,17 +428,17 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel_tab_1Layout = new javax.swing.GroupLayout(jPanel_tab_1);
-        jPanel_tab_1.setLayout(jPanel_tab_1Layout);
-        jPanel_tab_1Layout.setHorizontalGroup(
-            jPanel_tab_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel_tab_MethodTimeInvocationLayout = new javax.swing.GroupLayout(jPanel_tab_MethodTimeInvocation);
+        jPanel_tab_MethodTimeInvocation.setLayout(jPanel_tab_MethodTimeInvocationLayout);
+        jPanel_tab_MethodTimeInvocationLayout.setHorizontalGroup(
+            jPanel_tab_MethodTimeInvocationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel_tab_1Layout.setVerticalGroup(
-            jPanel_tab_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_tab_1Layout.createSequentialGroup()
+        jPanel_tab_MethodTimeInvocationLayout.setVerticalGroup(
+            jPanel_tab_MethodTimeInvocationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_tab_MethodTimeInvocationLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -372,9 +448,9 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPaneMain.addTab("Medtod time invocation", jPanel_tab_1);
+        jTabbedPaneMain.addTab("Medtod time invocation", jPanel_tab_MethodTimeInvocation);
 
-        jPanel_tab_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel_tab_MethodExecutionNumberOfTimes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Method executed number of times");
@@ -421,17 +497,17 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel_tab_2Layout = new javax.swing.GroupLayout(jPanel_tab_2);
-        jPanel_tab_2.setLayout(jPanel_tab_2Layout);
-        jPanel_tab_2Layout.setHorizontalGroup(
-            jPanel_tab_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel_tab_MethodExecutionNumberOfTimesLayout = new javax.swing.GroupLayout(jPanel_tab_MethodExecutionNumberOfTimes);
+        jPanel_tab_MethodExecutionNumberOfTimes.setLayout(jPanel_tab_MethodExecutionNumberOfTimesLayout);
+        jPanel_tab_MethodExecutionNumberOfTimesLayout.setHorizontalGroup(
+            jPanel_tab_MethodExecutionNumberOfTimesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel_tab_2Layout.setVerticalGroup(
-            jPanel_tab_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_tab_2Layout.createSequentialGroup()
+        jPanel_tab_MethodExecutionNumberOfTimesLayout.setVerticalGroup(
+            jPanel_tab_MethodExecutionNumberOfTimesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_tab_MethodExecutionNumberOfTimesLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -441,20 +517,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPaneMain.addTab("Method executed number of times", jPanel_tab_2);
-
-        javax.swing.GroupLayout jPanel_tab_3Layout = new javax.swing.GroupLayout(jPanel_tab_3);
-        jPanel_tab_3.setLayout(jPanel_tab_3Layout);
-        jPanel_tab_3Layout.setHorizontalGroup(
-            jPanel_tab_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 667, Short.MAX_VALUE)
-        );
-        jPanel_tab_3Layout.setVerticalGroup(
-            jPanel_tab_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
-        );
-
-        jTabbedPaneMain.addTab("Anomalies", jPanel_tab_3);
+        jTabbedPaneMain.addTab("Method executed number of times", jPanel_tab_MethodExecutionNumberOfTimes);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -568,13 +631,21 @@ public class Main extends javax.swing.JFrame {
         Object[][] arrData1 = Tools.toArray(analyse.getAnalysedTime(), (Integer) ((ArrayList) analyse.getAnalysedTime().get(0)).size());
         Object[] arrHeadings1 = (Object[]) analyse.getLogFiles().toArray();
         Object[] arrHeadingTooltips1 = (Object[]) analyse.getLogFiles().toArray();
-        graphicalViewTab1(arrData1, arrHeadings1, arrHeadingTooltips1);
+        graphicalViewTab(jTable1, arrData1, arrHeadings1, arrHeadingTooltips1);
         // tab-2 values
         Object[][] arrData2 = Tools.toArray(analyse.getanalysedNMethods(), (Integer) ((ArrayList) analyse.getanalysedNMethods().get(0)).size());
         Object[] arrHeadings2 = (Object[]) analyse.getLogFiles().toArray();
         Object[] arrHeadingTooltips2 = (Object[]) analyse.getLogFiles().toArray();
-        graphicalViewTab2(arrData2, arrHeadings2, arrHeadingTooltips2);
+        graphicalViewTab(jTable2, arrData2, arrHeadings2, arrHeadingTooltips2);
+        // tab-3 values
+        Object[][] arrData3 = Tools.toArray(analyse.getanalysedNMethods(), (Integer) ((ArrayList) analyse.getanalysedNMethods().get(0)).size());
+        Object[] arrHeadings3 = (Object[]) analyse.getLogFiles().toArray();
+        Object[] arrHeadingTooltips3 = (Object[]) analyse.getLogFiles().toArray();
+        graphicalViewTab(jTable3, arrData3, arrHeadings3, arrHeadingTooltips3);
         //
+        jTabbedPaneMain.setEnabledAt(1, true);
+        jTabbedPaneMain.setEnabledAt(2, true);
+        jTabbedPaneMain.setEnabledAt(3, true);
     }//GEN-LAST:event_analyseBtnActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -587,19 +658,10 @@ public class Main extends javax.swing.JFrame {
         resetInputForm();
     }//GEN-LAST:event_formWindowOpened
     
-    private void graphicalViewTab1(Object[][] arrData, Object[] arrHeadings, Object[] arrHeadingTooltips) {
+    private void graphicalViewTab(JTable jTableObj, Object[][] arrData, Object[] arrHeadings, Object[] arrHeadingTooltips) {
             // jPanel_Tab_TabularGraphicView.setEnabled(true);   
-            jTabbedPaneMain.setEnabledAt(1, true);
             DefaultTableModel model = new DefaultTableModel(arrData,arrHeadings);
-            jTable1.setModel(model); //= new JTable(model);
-            
-    }
-    private void graphicalViewTab2(Object[][] arrData, Object[] arrHeadings, Object[] arrHeadingTooltips) {
-            // jPanel_Tab_TabularGraphicView.setEnabled(true);   
-            jTabbedPaneMain.setEnabledAt(2, true);
-            DefaultTableModel model = new DefaultTableModel(arrData,arrHeadings);
-            jTable2.setModel(model); //= new JTable(model);
-            
+            jTableObj.setModel(model); //= new JTable(model);
     }
     
     private void resetInputForm() {
@@ -677,6 +739,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JList<File> jList_listOfFiles;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -685,6 +749,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -697,15 +764,17 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_InputForm_buttons;
     private javax.swing.JPanel jPanel_browse;
     private javax.swing.JPanel jPanel_listing_files;
-    private javax.swing.JPanel jPanel_tab_1;
-    private javax.swing.JPanel jPanel_tab_2;
-    private javax.swing.JPanel jPanel_tab_3;
+    private javax.swing.JPanel jPanel_tab_Anomalies;
+    private javax.swing.JPanel jPanel_tab_MethodExecutionNumberOfTimes;
+    private javax.swing.JPanel jPanel_tab_MethodTimeInvocation;
     private javax.swing.JPanel jPanel_tab_home;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     private javax.swing.JButton resetBtn;
     // End of variables declaration//GEN-END:variables
 
