@@ -18,6 +18,7 @@ package com.github.ibmhackchallenge.methodtraceanalyser;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.*;
 import org.apache.commons.io.FileUtils;
 
@@ -47,7 +48,7 @@ public class Parser {
         System.out.println("Parsing file: " + logFile.getAbsolutePath());
         String log = FileUtils.readFileToString(logFile);
 
-        Pattern pattern1 = Pattern.compile("(\\d+:\\d+:\\d+.\\d+)([*|\\s])(\\w+)(\\s{6})(\\w+)(\\.)(\\d+)(\\s{6}[*\\s]\\s+[<>*-]\\s)(.+)");
+        Pattern pattern1 = Pattern.compile("(\\d+:\\d+:\\d+.\\d+)([*|\\s])(\\w+)(\\s{6})(\\w+)(\\.)(\\d+)(\\s{6}[*\\s]\\s+([<>*-])\\s)((.+)(\\n\\s+(.+))?)");
         Matcher matcher1 = pattern1.matcher(log);
 
         int methodId = 0;
@@ -55,38 +56,38 @@ public class Parser {
 
         while (matcher1.find()) {
             methodTime.add(matcher1.group(1));
-            methodText.add(matcher1.group(9));
-            eventType.add(Integer.parseInt(matcher1.group(7)));
+            String additionalText = (matcher1.group(13) != null) ? " " + matcher1.group(13) : "";
+            methodText.add(matcher1.group(11) + additionalText);
+            eventType.add(findEventType(matcher1.group(9)));
 
-            switch (eventType.get(eventType.size()-1)) {
+            switch (eventType.get(eventType.size() - 1)) {
                 case 0:
                     methodId++;
                     BufferId.add(methodId);
                     methodSequence.add(methodId);
-                    System.out.println("Found method, " + matcher1.group(9)
+                    System.out.println("Found method, " + methodText.get(methodText.size() - 1)
                             + " assigning method id: " + methodId);
                     break;
-                    
+
                 case 1:
                     methodSequence.add(BufferId.get(BufferId.size() - 1));
                     BufferId.remove(BufferId.size() - 1);
                     break;
-                    
-                //case 3:
-                //    Pattern eventPattern = Pattern.compile("Event\\sid\\s(\\d+),\\stext\\s=(.+)");
-                //    Matcher matchEvent = eventPattern.matcher(methodText.get(methodText.size()-1));
-                //    if(matchEvent.find()) {
-                //        methodSequence.add(Integer.parseInt(matchEvent.group(1)));
-                //        methodText.add(methodText.size()-1, matchEvent.group(2));
-                //    }
-                //    break;
-                //default:
-                //    methodSequence.add(0);
-                //    break;
             }
 
         }
         System.out.println("Methods found " + (int) (methodId));
+        System.out.println(methodSequence.toString());
         return parsedLog;
+    }
+
+    public static int findEventType(String input) {
+        if (input.equals(">")) {
+            return 0;
+        } else if (input.equals("<")) {
+            return 1;
+        }
+
+        return -1;
     }
 }
