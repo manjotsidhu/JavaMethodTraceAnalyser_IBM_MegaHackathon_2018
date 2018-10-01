@@ -78,38 +78,49 @@ public class Main extends javax.swing.JFrame {
         jPanel_InputForm_buttons = new javax.swing.JPanel();
         resetBtn = new javax.swing.JButton();
         analyseBtn = new javax.swing.JButton();
-        jPanel_tab_Anomalies = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jPanel17 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jPanel18 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        jPanel_tab_CodeFlowGraphicalview = new javax.swing.JPanel();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jScrollPaneListRight = new javax.swing.JScrollPane();
+        jListRight = new javax.swing.JList<>();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jListLeft = new javax.swing.JList<>();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel1Right = new javax.swing.JLabel();
         jPanel_tab_MethodTimeInvocation = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel19 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanel_graph_timeInvocation = new javax.swing.JPanel();
         jPanel_tab_MethodExecutionNumberOfTimes = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel20 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jPanel_tab_CodeFlowGraphicalview = new javax.swing.JPanel();
-        jSplitPane1 = new javax.swing.JSplitPane();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jListRight = new javax.swing.JList<>();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jListLeft = new javax.swing.JList<>();
-        jPanel4 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        jPanel_graph_executedNumberOfTimes = new javax.swing.JPanel();
+        jPanel_tab_Anomalies = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel22 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jPanel_graph_anomalies = new javax.swing.JPanel();
         GUI_top_panel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -117,6 +128,7 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Method Trace Analyser");
+        setIconImages(null);
         setName("AppGUI"); // NOI18N
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
@@ -135,6 +147,11 @@ public class Main extends javax.swing.JFrame {
         GUI_main_panel.setLayout(new java.awt.BorderLayout());
 
         jTabbedPaneMain.setMaximumSize(null);
+        jTabbedPaneMain.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPaneMainStateChanged(evt);
+            }
+        });
 
         jPanel_tab_home.setName(""); // NOI18N
         jPanel_tab_home.setLayout(new java.awt.GridBagLayout());
@@ -142,7 +159,7 @@ public class Main extends javax.swing.JFrame {
         jPanel5_main.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel5_main.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("Please click on browse button to select log file(s) you want to analyse");
+        jLabel1.setText("Please click on browse button to select log file(s) which you want to analyse");
         jLabel1.setToolTipText("");
         jPanel_browse.add(jLabel1);
 
@@ -328,73 +345,79 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPaneMain.addTab("Input trace logs", jPanel_tab_home);
 
-        jPanel_tab_Anomalies.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jSplitPane1.setDividerLocation(330);
+        jSplitPane1.setDividerSize(7);
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel7.setText("Anomalies");
-        jPanel16.add(jLabel7);
-
-        jLabel8.setText("Showing anomalies");
-        jPanel17.add(jLabel8);
-
-        jPanel18.setMaximumSize(null);
-
-        jScrollPane3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        jListRight.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jListRight.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListRight.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListRightValueChanged(evt);
             }
-        ));
-        jTable3.setMaximumSize(null);
-        jTable3.setMinimumSize(null);
-        jTable3.setName(""); // NOI18N
-        jTable3.setPreferredSize(null);
-        jScrollPane3.setViewportView(jTable3);
+        });
+        jScrollPaneListRight.setViewportView(jListRight);
 
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+        jListLeft.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jListLeft.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListLeft.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListLeftValueChanged(evt);
+            }
+        });
+        jScrollPane5.setViewportView(jListLeft);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("Graphical view of code flow to compare");
+        jPanel4.add(jLabel9);
+
+        jLabel10.setText("Select first file to show and compare");
+
+        jLabel1Right.setText("Select second file to show and compare");
+
+        javax.swing.GroupLayout jPanel_tab_CodeFlowGraphicalviewLayout = new javax.swing.GroupLayout(jPanel_tab_CodeFlowGraphicalview);
+        jPanel_tab_CodeFlowGraphicalview.setLayout(jPanel_tab_CodeFlowGraphicalviewLayout);
+        jPanel_tab_CodeFlowGraphicalviewLayout.setHorizontalGroup(
+            jPanel_tab_CodeFlowGraphicalviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_tab_CodeFlowGraphicalviewLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
+                .addGroup(jPanel_tab_CodeFlowGraphicalviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel_tab_CodeFlowGraphicalviewLayout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                        .addComponent(jScrollPaneListRight, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel_tab_CodeFlowGraphicalviewLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1Right)))
                 .addContainerGap())
         );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel_tab_AnomaliesLayout = new javax.swing.GroupLayout(jPanel_tab_Anomalies);
-        jPanel_tab_Anomalies.setLayout(jPanel_tab_AnomaliesLayout);
-        jPanel_tab_AnomaliesLayout.setHorizontalGroup(
-            jPanel_tab_AnomaliesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel_tab_AnomaliesLayout.setVerticalGroup(
-            jPanel_tab_AnomaliesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_tab_AnomaliesLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel_tab_CodeFlowGraphicalviewLayout.setVerticalGroup(
+            jPanel_tab_CodeFlowGraphicalviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_tab_CodeFlowGraphicalviewLayout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel_tab_CodeFlowGraphicalviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel1Right))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_tab_CodeFlowGraphicalviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPaneListRight, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE))
         );
 
-        jTabbedPaneMain.addTab("Anomalies", jPanel_tab_Anomalies);
+        jTabbedPaneMain.addTab("Code flow graphical view", jPanel_tab_CodeFlowGraphicalview);
 
         jPanel_tab_MethodTimeInvocation.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -426,20 +449,44 @@ public class Main extends javax.swing.JFrame {
         jTable1.setPreferredSize(null);
         jScrollPane1.setViewportView(jTable1);
 
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Data table", jPanel19);
+
+        javax.swing.GroupLayout jPanel_graph_timeInvocationLayout = new javax.swing.GroupLayout(jPanel_graph_timeInvocation);
+        jPanel_graph_timeInvocation.setLayout(jPanel_graph_timeInvocationLayout);
+        jPanel_graph_timeInvocationLayout.setHorizontalGroup(
+            jPanel_graph_timeInvocationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 670, Short.MAX_VALUE)
+        );
+        jPanel_graph_timeInvocationLayout.setVerticalGroup(
+            jPanel_graph_timeInvocationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 460, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Show graph", jPanel_graph_timeInvocation);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         javax.swing.GroupLayout jPanel_tab_MethodTimeInvocationLayout = new javax.swing.GroupLayout(jPanel_tab_MethodTimeInvocation);
@@ -454,7 +501,7 @@ public class Main extends javax.swing.JFrame {
             jPanel_tab_MethodTimeInvocationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_tab_MethodTimeInvocationLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -462,7 +509,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPaneMain.addTab("Medtod time invocation", jPanel_tab_MethodTimeInvocation);
+        jTabbedPaneMain.addTab("Method time invocation", jPanel_tab_MethodTimeInvocation);
 
         jPanel_tab_MethodExecutionNumberOfTimes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -494,20 +541,44 @@ public class Main extends javax.swing.JFrame {
         jTable2.setPreferredSize(null);
         jScrollPane2.setViewportView(jTable2);
 
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("Data table", jPanel20);
+
+        javax.swing.GroupLayout jPanel_graph_executedNumberOfTimesLayout = new javax.swing.GroupLayout(jPanel_graph_executedNumberOfTimes);
+        jPanel_graph_executedNumberOfTimes.setLayout(jPanel_graph_executedNumberOfTimesLayout);
+        jPanel_graph_executedNumberOfTimesLayout.setHorizontalGroup(
+            jPanel_graph_executedNumberOfTimesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 670, Short.MAX_VALUE)
+        );
+        jPanel_graph_executedNumberOfTimesLayout.setVerticalGroup(
+            jPanel_graph_executedNumberOfTimesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 455, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("Show graph", jPanel_graph_executedNumberOfTimes);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
+                .addComponent(jTabbedPane2)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE))
+            .addComponent(jTabbedPane2)
         );
 
         javax.swing.GroupLayout jPanel_tab_MethodExecutionNumberOfTimesLayout = new javax.swing.GroupLayout(jPanel_tab_MethodExecutionNumberOfTimes);
@@ -532,71 +603,97 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPaneMain.addTab("Method executed number of times", jPanel_tab_MethodExecutionNumberOfTimes);
 
-        jSplitPane1.setDividerLocation(330);
-        jSplitPane1.setDividerSize(7);
+        jPanel_tab_Anomalies.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jListRight.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jListRight.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jListRight.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jListRightValueChanged(evt);
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setText("Anomalies");
+        jPanel16.add(jLabel7);
+
+        jLabel8.setText("Showing anomalies");
+        jPanel17.add(jLabel8);
+
+        jPanel18.setMaximumSize(null);
+
+        jScrollPane3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
-        jScrollPane4.setViewportView(jListRight);
+        ));
+        jTable3.setMaximumSize(null);
+        jTable3.setMinimumSize(null);
+        jTable3.setName(""); // NOI18N
+        jTable3.setPreferredSize(null);
+        jScrollPane3.setViewportView(jTable3);
 
-        jListLeft.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jListLeft.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jListLeft.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jListLeftValueChanged(evt);
-            }
-        });
-        jScrollPane5.setViewportView(jListLeft);
+        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
+        jPanel22.setLayout(jPanel22Layout);
+        jPanel22Layout.setHorizontalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+        );
+        jPanel22Layout.setVerticalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+        );
 
-        jTextField1.setText("Code flow graphical view to compare");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jTextField1);
+        jTabbedPane3.addTab("Data table", jPanel22);
 
-        javax.swing.GroupLayout jPanel_tab_CodeFlowGraphicalviewLayout = new javax.swing.GroupLayout(jPanel_tab_CodeFlowGraphicalview);
-        jPanel_tab_CodeFlowGraphicalview.setLayout(jPanel_tab_CodeFlowGraphicalviewLayout);
-        jPanel_tab_CodeFlowGraphicalviewLayout.setHorizontalGroup(
-            jPanel_tab_CodeFlowGraphicalviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel_tab_CodeFlowGraphicalviewLayout.createSequentialGroup()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_tab_CodeFlowGraphicalviewLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel_graph_anomaliesLayout = new javax.swing.GroupLayout(jPanel_graph_anomalies);
+        jPanel_graph_anomalies.setLayout(jPanel_graph_anomaliesLayout);
+        jPanel_graph_anomaliesLayout.setHorizontalGroup(
+            jPanel_graph_anomaliesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 670, Short.MAX_VALUE)
+        );
+        jPanel_graph_anomaliesLayout.setVerticalGroup(
+            jPanel_graph_anomaliesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 455, Short.MAX_VALUE)
+        );
+
+        jTabbedPane3.addTab("Show graph", jPanel_graph_anomalies);
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1)
+                .addComponent(jTabbedPane3)
                 .addContainerGap())
         );
-        jPanel_tab_CodeFlowGraphicalviewLayout.setVerticalGroup(
-            jPanel_tab_CodeFlowGraphicalviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_tab_CodeFlowGraphicalviewLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_tab_CodeFlowGraphicalviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane3)
         );
 
-        jTabbedPaneMain.addTab("Code flow graphical view", jPanel_tab_CodeFlowGraphicalview);
+        javax.swing.GroupLayout jPanel_tab_AnomaliesLayout = new javax.swing.GroupLayout(jPanel_tab_Anomalies);
+        jPanel_tab_Anomalies.setLayout(jPanel_tab_AnomaliesLayout);
+        jPanel_tab_AnomaliesLayout.setHorizontalGroup(
+            jPanel_tab_AnomaliesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel_tab_AnomaliesLayout.setVerticalGroup(
+            jPanel_tab_AnomaliesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_tab_AnomaliesLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPaneMain.addTab("Anomalies", jPanel_tab_Anomalies);
 
         GUI_main_panel.add(jTabbedPaneMain, java.awt.BorderLayout.CENTER);
 
@@ -610,7 +707,8 @@ public class Main extends javax.swing.JFrame {
 
         GUI_main_panel.add(GUI_top_panel, java.awt.BorderLayout.PAGE_START);
 
-        GUI_bottom_text.setText("Designed and developed by team : JavaMonks CHRIST (Deemed to be University), Bangalore, INDIA");
+        GUI_bottom_text.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        GUI_bottom_text.setText("  Designed and developed by team : JavaMonks, CHRIST (Deemed to be University), Bengaluru, INDIA");
         GUI_main_panel.add(GUI_bottom_text, java.awt.BorderLayout.PAGE_END);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -636,17 +734,24 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getSource() == browseBtn) {
             // File Chooser (Browse Tab)
+            
             JFileChooser chooser = new JFileChooser();
             chooser.setMultiSelectionEnabled(true);
             chooser.setCurrentDirectory(SampleLogFilesFolder);
-            chooser.showOpenDialog(GUI_main_panel);
+            int result = chooser.showOpenDialog(GUI_main_panel);
+            if (result != JFileChooser.APPROVE_OPTION) return;
             logFiles = chooser.getSelectedFiles();
             filesList = new DefaultListModel<>();
+            boolean isFileSelected = false;
             for (File file : logFiles) {
                 filesList.addElement(file);
+                isFileSelected = true;
             }
-
-            updateFormOnFilesSelected();
+            if (isFileSelected) {
+                analyseBtn.setEnabled(true);
+                updateFormOnFilesSelected();
+            }
+            
         }
     }//GEN-LAST:event_browseBtnActionPerformed
 
@@ -662,6 +767,7 @@ public class Main extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         /*
         String arrData[][] = {{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}
                 ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
@@ -711,11 +817,13 @@ public class Main extends javax.swing.JFrame {
         // tab-4 code flow compare graph
 
         ArrayList flowLogFiles = analyse.getLogFiles();
+        //System.out.println(Arrays.deepToString(flowLogFiles.toArray()));
         flowLogFiles.remove(0);
         
         Object[] arrHeadings4 = (Object[]) flowLogFiles.toArray();
         DefaultListModel model4 = new DefaultListModel();
         jListLeft.removeAll();
+        jListLeft.clearSelection();
         jListLeft.setModel(model4);
         for (int index = 0; index < arrHeadings4.length; index++) {
             model4.add(index, arrHeadings4[index]);
@@ -725,15 +833,19 @@ public class Main extends javax.swing.JFrame {
         Object[] arrHeadings5 = (Object[]) flowLogFiles.toArray();
         DefaultListModel model5 = new DefaultListModel();
         jListRight.removeAll();
+        jListRight.clearSelection();
         jListRight.setModel(model5);
         for (int index = 0; index < arrHeadings5.length; index++) {
             model5.add(index, arrHeadings5[index]);
         }
 
-        ArrayList text1 = (ArrayList) (((ArrayList) analyse.getLogText()).get(0));
-        ArrayList sequence1 = (ArrayList<Integer>) (((ArrayList) analyse.getLogSequence()).get(0));
+        int leftIndex=0;
+        jListLeft.setSelectedIndex(leftIndex);
+        ArrayList text1 = (ArrayList) (((ArrayList) analyse.getLogText()).get(leftIndex));
+        ArrayList sequence1 = (ArrayList<Integer>) (((ArrayList) analyse.getLogSequence()).get(leftIndex));
+        leftFrame.removeAll();
         try {
-            leftFrame = new CodeFlow(text1, sequence1,(String) arrHeadings5[0]);
+            leftFrame = new CodeFlow(text1, sequence1,(String) arrHeadings5[leftIndex]);
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -741,24 +853,42 @@ public class Main extends javax.swing.JFrame {
         leftFrame.updateUI();
         leftFrame.setVisible(true);
         
-        if (arrHeadings5.length > 1) {
-            ArrayList text2 = (ArrayList) (((ArrayList) analyse.getLogText()).get(1));
-            ArrayList sequence2 = (ArrayList<Integer>) (((ArrayList) analyse.getLogSequence()).get(1));
-            try {
-                rightFrame = new CodeFlow(text2, sequence2, (String) arrHeadings5[1]);
-            } catch (IOException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            jSplitPane1.setRightComponent(rightFrame);
-            rightFrame.updateUI();
-            rightFrame.setVisible(true);
+        int rightIndex=0;
+        if (arrHeadings5.length>1) rightIndex=1;
+        
+        jListRight.setSelectedIndex(rightIndex);
+        ArrayList text2 = (ArrayList) (((ArrayList) analyse.getLogText()).get(rightIndex));
+        ArrayList sequence2 = (ArrayList<Integer>) (((ArrayList) analyse.getLogSequence()).get(rightIndex));
+        rightFrame.removeAll();
+        try {
+            rightFrame = new CodeFlow(text2, sequence2, (String) arrHeadings5[rightIndex]);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        jSplitPane1.setRightComponent(rightFrame);
+        rightFrame.updateUI();
+        rightFrame.setVisible(true);
+        
+        if (arrHeadings5.length>1) {
+            rightFrame.setVisible(true);
+            jListRight.setVisible(true);
+            jLabel1Right.setVisible(true);
+            jScrollPaneListRight.setVisible(true);
+        }
+        else
+        {   rightFrame.setVisible(false);
+            jListRight.setVisible(false);
+            jLabel1Right.setVisible(false);
+            jScrollPaneListRight.setVisible(false);
+        }
+        
         //
         jTabbedPaneMain.setEnabledAt(1, true);
         jTabbedPaneMain.setEnabledAt(2, true);
         jTabbedPaneMain.setEnabledAt(3, true);
         jTabbedPaneMain.setEnabledAt(4, true);
+        splitPaneSplitRefresh();
+        analyseBtn.setEnabled(false);
     }//GEN-LAST:event_analyseBtnActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -771,16 +901,19 @@ public class Main extends javax.swing.JFrame {
         resetInputForm();
     }//GEN-LAST:event_formWindowOpened
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         jSplitPane1.setDividerLocation(jSplitPane1.getWidth() / 2);
     }//GEN-LAST:event_formComponentResized
-
+    private void splitPaneSplitRefresh() {  
+        jSplitPane1.setDividerLocation(jSplitPane1.getWidth() / 2);
+    }
     private void jListLeftValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListLeftValueChanged
-        ArrayList text = (ArrayList) (((ArrayList) analyse.getLogText()).get(jListLeft.getSelectedIndex()));
+        
+        int index = jListLeft.getSelectedIndex();
+        if(index < 0) return;
+        System.out.println(index);
+        //System.out.println(Arrays.deepToString(analyse.getLogText().toArray()));
+        ArrayList text = (ArrayList) (((ArrayList) analyse.getLogText()).get(index));
         ArrayList sequence = (ArrayList<Integer>) (((ArrayList) analyse.getLogSequence()).get(jListLeft.getSelectedIndex()));
         try {
             leftFrame = new CodeFlow(text, sequence, jListLeft.getSelectedValue());
@@ -789,11 +922,13 @@ public class Main extends javax.swing.JFrame {
         }
         jSplitPane1.setLeftComponent(leftFrame);
         leftFrame.setVisible(true);
-        jSplitPane1.setDividerLocation(jSplitPane1.getWidth() / 2);
+        splitPaneSplitRefresh();
     }//GEN-LAST:event_jListLeftValueChanged
 
     private void jListRightValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListRightValueChanged
-        ArrayList text = (ArrayList) (((ArrayList) analyse.getLogText()).get(jListRight.getSelectedIndex()));
+        int index = jListRight.getSelectedIndex();
+        if(index < 0) return;
+        ArrayList text = (ArrayList) (((ArrayList) analyse.getLogText()).get(index));
         ArrayList sequence = (ArrayList<Integer>) (((ArrayList) analyse.getLogSequence()).get(jListRight.getSelectedIndex()));
         try {
             rightFrame = new CodeFlow(text, sequence, jListRight.getSelectedValue());
@@ -803,8 +938,13 @@ public class Main extends javax.swing.JFrame {
         }
         jSplitPane1.setRightComponent(rightFrame);
         rightFrame.setVisible(true);
-        jSplitPane1.setDividerLocation(jSplitPane1.getWidth() / 2);
+        splitPaneSplitRefresh();
     }//GEN-LAST:event_jListRightValueChanged
+
+    private void jTabbedPaneMainStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneMainStateChanged
+        // TODO add your handling code here:
+        splitPaneSplitRefresh();
+    }//GEN-LAST:event_jTabbedPaneMainStateChanged
 
     private void graphicalViewTab(JTable jTableObj, Object[][] arrData, Object[] arrHeadings, Object[] arrHeadingTooltips) {
         // jPanel_Tab_TabularGraphicView.setEnabled(true);   
@@ -813,8 +953,11 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void resetInputForm() {
+        
         filesList.clear();
         jList_listOfFiles.removeAll();
+        jListLeft.removeAll();
+        jListRight.removeAll();
         analyseBtn.setEnabled(false);
         resetBtn.setEnabled(false);
         jPanel_listing_files.setVisible(false);
@@ -837,6 +980,7 @@ public class Main extends javax.swing.JFrame {
         jPanel_InputForm_buttons.setVisible(true);
         browseBtn.setEnabled(false);
         jPanel_browse.setVisible(false);
+        splitPaneSplitRefresh();
     }
 
     /**
@@ -883,6 +1027,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton analyseBtn;
     private javax.swing.JButton browseBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel1Right;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel2_text;
     private javax.swing.JLabel jLabel3;
@@ -891,6 +1037,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jListLeft;
     private javax.swing.JList<String> jListRight;
     private javax.swing.JList<File> jList_listOfFiles;
@@ -904,7 +1051,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -915,6 +1065,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanel_InputForm_buttons;
     private javax.swing.JPanel jPanel_browse;
+    private javax.swing.JPanel jPanel_graph_anomalies;
+    private javax.swing.JPanel jPanel_graph_executedNumberOfTimes;
+    private javax.swing.JPanel jPanel_graph_timeInvocation;
     private javax.swing.JPanel jPanel_listing_files;
     private javax.swing.JPanel jPanel_tab_Anomalies;
     private javax.swing.JPanel jPanel_tab_CodeFlowGraphicalview;
@@ -924,14 +1077,16 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPaneListRight;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton resetBtn;
     // End of variables declaration//GEN-END:variables
 
