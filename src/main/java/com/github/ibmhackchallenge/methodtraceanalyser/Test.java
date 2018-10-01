@@ -41,7 +41,6 @@ public class Test {
         a2.add(4);
         
         //System.out.println(Arrays.deepToString(a.toArray()));
-        
 
         Analyser an = new Analyser(in);
         System.out.println(Arrays.deepToString(an.getAnomalies().toArray()));

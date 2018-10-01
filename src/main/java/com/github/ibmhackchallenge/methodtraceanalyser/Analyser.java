@@ -36,6 +36,10 @@ public class Analyser {
     private final ArrayList analysedTime = new ArrayList();
     private final ArrayList<Integer> analysedBufferMethods = new ArrayList();
     private final ArrayList analysedTimeMethods = new ArrayList();
+    
+    private final ArrayList graphAnalysedTime = new ArrayList();
+    private final ArrayList graphAnalysedTimeMethods = new ArrayList();
+    
     private final ArrayList analysedNMethods = new ArrayList();
     private final ArrayList<String> logFiles = new ArrayList();
 
@@ -44,6 +48,7 @@ public class Analyser {
         anomalies.add(anomaliesMethod);
         anomalies.add(anomaliesTime);
         analysedTime.add(analysedTimeMethods);
+        graphAnalysedTime.add(graphAnalysedTimeMethods);
         logFiles.add("Methods");
         boolean firstItr = true;
 
@@ -91,10 +96,12 @@ public class Analyser {
                 int methodOccur = Tools.find(analysedBufferMethods, analysedTimeMethods, 0, (Integer) parsedSequence.get(firstIndex), (String) parsedText.get(firstIndex));
                 results.add(methodOccur, timeTaken);
             } else {
-                if (analysedTimeMethods.contains((String) parsedText.get(firstIndex))) {
-                    analysedTimeMethods.add(parsedText.get(firstIndex) + " #" + iteration);
+                if (graphAnalysedTimeMethods.contains((String) parsedText.get(firstIndex))) {
+                    analysedTimeMethods.add(parsedText.get(firstIndex));
+                    graphAnalysedTimeMethods.add(parsedText.get(firstIndex) + " #" + iteration);
                 } else {
                     analysedTimeMethods.add(parsedText.get(firstIndex));
+                    graphAnalysedTimeMethods.add(parsedText.get(firstIndex));
                 }
                 analysedBufferMethods.add((Integer) parsedSequence.get(firstIndex));
         
@@ -102,6 +109,7 @@ public class Analyser {
             }
         }
         analysedTime.add(results);
+        graphAnalysedTime.add(results);
     }
 
     /**
@@ -113,6 +121,14 @@ public class Analyser {
      */
     public ArrayList getAnalysedTime() {
         return analysedTime;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public ArrayList getGraphAnalysedTime() {
+        return graphAnalysedTime;
     }
 
     /**
@@ -195,7 +211,7 @@ public class Analyser {
         }
 
         if (TimeAnomaly != 0) {
-            anomaliesType.add(0);
+            anomaliesType.add(templates[0]);
             anomaliesMethod.add(anomalyMethod);
             anomaliesTime.add(anomalyTimeTook);
         }
@@ -204,11 +220,7 @@ public class Analyser {
         int methodMissingAnomaly = 0;
         int methodAdditionalAnomaly = 0;
 
-        //if(Tools.removeDuplicates(parsedSequence).size() != parsedSequence.size()/2) {
-        //if(Tools.removeDuplicates(parsedSequence).size() < parsedSequence.size()/2) {
-        //} else {
-        //}
-        //}
+        
     }
 
     public ArrayList getAnomalies() {

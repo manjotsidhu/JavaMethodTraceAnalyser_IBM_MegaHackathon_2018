@@ -40,7 +40,7 @@ public class Graph extends ApplicationFrame {
 
         Object[] labels = analyse.getLogFiles().toArray();
 
-        Object[][] time = Tools.toArray(analyse.getAnalysedTime(), ((ArrayList) analyse.getAnalysedTime().get(0)).size());
+        Object[][] time = Tools.toArray(analyse.getGraphAnalysedTime(), ((ArrayList) analyse.getGraphAnalysedTime().get(0)).size());
         
         final DefaultCategoryDataset dataset
                 = new DefaultCategoryDataset();
