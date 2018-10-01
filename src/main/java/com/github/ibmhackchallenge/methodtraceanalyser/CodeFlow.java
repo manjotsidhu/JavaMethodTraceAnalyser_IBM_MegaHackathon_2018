@@ -24,11 +24,13 @@ import com.mxgraph.view.mxGraph;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import javax.swing.JInternalFrame;
+import javax.swing.JWindow;
 
-public class CodeFlow extends JFrame {
+public class CodeFlow extends JInternalFrame {
 
-    public CodeFlow(ArrayList parsedText, ArrayList<Integer> parsedSequence) throws IOException {
-        super("Code Flow");
+    public CodeFlow(ArrayList parsedText, ArrayList<Integer> parsedSequence, String logFile) throws IOException {
+        super(logFile);
 
         mxGraph graph = new mxGraph();
         Object parent = graph.getDefaultParent();
@@ -56,9 +58,11 @@ public class CodeFlow extends JFrame {
                 xMultiplier = (itr == 1) ? 100 : xMultiplier;
             }
 
+        } catch(Exception ex) {
+                
         } finally {
             graph.getModel().endUpdate();
-        }
+        } 
 
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
         getContentPane().add(graphComponent);

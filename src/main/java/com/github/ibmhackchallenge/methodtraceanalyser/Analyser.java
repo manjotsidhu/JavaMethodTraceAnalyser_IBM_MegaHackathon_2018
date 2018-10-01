@@ -28,6 +28,9 @@ import java.util.ArrayList;
  */
 public class Analyser {
 
+    private final ArrayList logSequence = new ArrayList();
+    private final ArrayList logText = new ArrayList();
+
     private final ArrayList anomalies = new ArrayList();
     private final ArrayList anomaliesType = new ArrayList();
     private final ArrayList anomaliesMethod = new ArrayList();
@@ -57,7 +60,9 @@ public class Analyser {
 
             ArrayList<String> parsedTime = (ArrayList<String>) parsedLog.get(0);
             ArrayList parsedText = (ArrayList) parsedLog.get(1);
+            this.logText.add(parsedText);
             ArrayList<Integer> parsedSequence = (ArrayList) parsedLog.get(2);
+            this.logSequence.add(parsedSequence);
             Integer nMethods = parsedSequence.size() / 2;
 
             analyseTime(nMethods, parsedTime, parsedText, parsedSequence);
@@ -175,6 +180,13 @@ public class Analyser {
         return logFiles;
     }
 
+    public ArrayList<Integer> getLogSequence() {
+        return logSequence;
+    }
+    
+    public ArrayList getLogText() {
+        return logText;
+    }
     /**
      * Testing purpose only
      */

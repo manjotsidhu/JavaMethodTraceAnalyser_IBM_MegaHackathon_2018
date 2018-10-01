@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,11 +32,14 @@ import javax.swing.table.DefaultTableModel;
  * @author Sidhu
  */
 public class Main extends javax.swing.JFrame {
+
     Analyser analyse;
     File[] logFiles;
     DefaultListModel<File> filesList = new DefaultListModel<>();
     File SampleLogFilesFolder = new File("./sample_logs");
-        
+    CodeFlow leftFrame;
+    CodeFlow rightFrame;
+
     /**
      * Creates new form MainAlt
      */
@@ -98,7 +102,14 @@ public class Main extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jPanel_tab_CodeFlowGraphicalview = new javax.swing.JPanel();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jListRight = new javax.swing.JList<>();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jListLeft = new javax.swing.JList<>();
         jPanel4 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
         GUI_top_panel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -107,6 +118,11 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Method Trace Analyser");
         setName("AppGUI"); // NOI18N
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -322,7 +338,6 @@ public class Main extends javax.swing.JFrame {
         jPanel17.add(jLabel8);
 
         jPanel18.setMaximumSize(null);
-        jPanel18.setMinimumSize(null);
 
         jScrollPane3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -349,14 +364,14 @@ public class Main extends javax.swing.JFrame {
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel_tab_AnomaliesLayout = new javax.swing.GroupLayout(jPanel_tab_Anomalies);
@@ -391,7 +406,6 @@ public class Main extends javax.swing.JFrame {
         jPanel13.add(jLabel3);
 
         jPanel2.setMaximumSize(null);
-        jPanel2.setMinimumSize(null);
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -418,14 +432,14 @@ public class Main extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel_tab_MethodTimeInvocationLayout = new javax.swing.GroupLayout(jPanel_tab_MethodTimeInvocation);
@@ -460,7 +474,6 @@ public class Main extends javax.swing.JFrame {
         jPanel15.add(jLabel6);
 
         jPanel3.setMaximumSize(null);
-        jPanel3.setMinimumSize(null);
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -487,14 +500,14 @@ public class Main extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel_tab_MethodExecutionNumberOfTimesLayout = new javax.swing.GroupLayout(jPanel_tab_MethodExecutionNumberOfTimes);
@@ -519,18 +532,71 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPaneMain.addTab("Method executed number of times", jPanel_tab_MethodExecutionNumberOfTimes);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 667, Short.MAX_VALUE)
+        jSplitPane1.setDividerLocation(330);
+        jSplitPane1.setDividerSize(7);
+
+        jListRight.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jListRight.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListRight.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListRightValueChanged(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jListRight);
+
+        jListLeft.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jListLeft.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListLeft.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListLeftValueChanged(evt);
+            }
+        });
+        jScrollPane5.setViewportView(jListLeft);
+
+        jTextField1.setText("Code flow graphical view to compare");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jTextField1);
+
+        javax.swing.GroupLayout jPanel_tab_CodeFlowGraphicalviewLayout = new javax.swing.GroupLayout(jPanel_tab_CodeFlowGraphicalview);
+        jPanel_tab_CodeFlowGraphicalview.setLayout(jPanel_tab_CodeFlowGraphicalviewLayout);
+        jPanel_tab_CodeFlowGraphicalviewLayout.setHorizontalGroup(
+            jPanel_tab_CodeFlowGraphicalviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel_tab_CodeFlowGraphicalviewLayout.createSequentialGroup()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_tab_CodeFlowGraphicalviewLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSplitPane1)
+                .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
+        jPanel_tab_CodeFlowGraphicalviewLayout.setVerticalGroup(
+            jPanel_tab_CodeFlowGraphicalviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_tab_CodeFlowGraphicalviewLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_tab_CodeFlowGraphicalviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
         );
 
-        jTabbedPaneMain.addTab("Compare code flow", jPanel4);
+        jTabbedPaneMain.addTab("Code flow graphical view", jPanel_tab_CodeFlowGraphicalview);
 
         GUI_main_panel.add(jTabbedPaneMain, java.awt.BorderLayout.CENTER);
 
@@ -579,7 +645,7 @@ public class Main extends javax.swing.JFrame {
             for (File file : logFiles) {
                 filesList.addElement(file);
             }
-            
+
             updateFormOnFilesSelected();
         }
     }//GEN-LAST:event_browseBtnActionPerformed
@@ -587,7 +653,7 @@ public class Main extends javax.swing.JFrame {
     private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
         // TODO add your handling code here:
         resetInputForm();
-        
+
     }//GEN-LAST:event_resetBtnActionPerformed
 
     private void analyseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analyseBtnActionPerformed
@@ -625,8 +691,8 @@ public class Main extends javax.swing.JFrame {
         
         String arrHeadings[] = {"Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code"};
         String arrHeadingTooltips[] = {"Name","code"};
-        */
-        
+         */
+
         // tab-1 values
         Object[][] arrData1 = Tools.toArray(analyse.getAnalysedTime(), (Integer) ((ArrayList) analyse.getAnalysedTime().get(0)).size());
         Object[] arrHeadings1 = (Object[]) analyse.getLogFiles().toArray();
@@ -642,28 +708,110 @@ public class Main extends javax.swing.JFrame {
         Object[] arrHeadings3 = (Object[]) analyse.getLogFiles().toArray();
         Object[] arrHeadingTooltips3 = (Object[]) analyse.getLogFiles().toArray();
         graphicalViewTab(jTable3, arrData3, arrHeadings3, arrHeadingTooltips3);
+        // tab-4 code flow compare graph
+
+        ArrayList flowLogFiles = analyse.getLogFiles();
+        flowLogFiles.remove(0);
+        
+        Object[] arrHeadings4 = (Object[]) flowLogFiles.toArray();
+        DefaultListModel model4 = new DefaultListModel();
+        jListLeft.removeAll();
+        jListLeft.setModel(model4);
+        for (int index = 0; index < arrHeadings4.length; index++) {
+            model4.add(index, arrHeadings4[index]);
+        }
+        
+
+        Object[] arrHeadings5 = (Object[]) flowLogFiles.toArray();
+        DefaultListModel model5 = new DefaultListModel();
+        jListRight.removeAll();
+        jListRight.setModel(model5);
+        for (int index = 0; index < arrHeadings5.length; index++) {
+            model5.add(index, arrHeadings5[index]);
+        }
+
+        ArrayList text1 = (ArrayList) (((ArrayList) analyse.getLogText()).get(0));
+        ArrayList sequence1 = (ArrayList<Integer>) (((ArrayList) analyse.getLogSequence()).get(0));
+        try {
+            leftFrame = new CodeFlow(text1, sequence1,(String) arrHeadings5[0]);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jSplitPane1.setLeftComponent(leftFrame);
+        leftFrame.updateUI();
+        leftFrame.setVisible(true);
+        
+        if (arrHeadings5.length > 1) {
+            ArrayList text2 = (ArrayList) (((ArrayList) analyse.getLogText()).get(1));
+            ArrayList sequence2 = (ArrayList<Integer>) (((ArrayList) analyse.getLogSequence()).get(1));
+            try {
+                rightFrame = new CodeFlow(text2, sequence2, (String) arrHeadings5[1]);
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            jSplitPane1.setRightComponent(rightFrame);
+            rightFrame.updateUI();
+            rightFrame.setVisible(true);
+        }
+
         //
         jTabbedPaneMain.setEnabledAt(1, true);
         jTabbedPaneMain.setEnabledAt(2, true);
         jTabbedPaneMain.setEnabledAt(3, true);
+        jTabbedPaneMain.setEnabledAt(4, true);
     }//GEN-LAST:event_analyseBtnActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         resetInputForm();
     }//GEN-LAST:event_formWindowOpened
-    
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        jSplitPane1.setDividerLocation(jSplitPane1.getWidth() / 2);
+    }//GEN-LAST:event_formComponentResized
+
+    private void jListLeftValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListLeftValueChanged
+        ArrayList text = (ArrayList) (((ArrayList) analyse.getLogText()).get(jListLeft.getSelectedIndex()));
+        ArrayList sequence = (ArrayList<Integer>) (((ArrayList) analyse.getLogSequence()).get(jListLeft.getSelectedIndex()));
+        try {
+            leftFrame = new CodeFlow(text, sequence, jListLeft.getSelectedValue());
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jSplitPane1.setLeftComponent(leftFrame);
+        leftFrame.setVisible(true);
+        jSplitPane1.setDividerLocation(jSplitPane1.getWidth() / 2);
+    }//GEN-LAST:event_jListLeftValueChanged
+
+    private void jListRightValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListRightValueChanged
+        ArrayList text = (ArrayList) (((ArrayList) analyse.getLogText()).get(jListRight.getSelectedIndex()));
+        ArrayList sequence = (ArrayList<Integer>) (((ArrayList) analyse.getLogSequence()).get(jListRight.getSelectedIndex()));
+        try {
+            rightFrame = new CodeFlow(text, sequence, jListRight.getSelectedValue());
+        } catch (Exception ex) {
+            rightFrame.removeAll();
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jSplitPane1.setRightComponent(rightFrame);
+        rightFrame.setVisible(true);
+        jSplitPane1.setDividerLocation(jSplitPane1.getWidth() / 2);
+    }//GEN-LAST:event_jListRightValueChanged
+
     private void graphicalViewTab(JTable jTableObj, Object[][] arrData, Object[] arrHeadings, Object[] arrHeadingTooltips) {
-            // jPanel_Tab_TabularGraphicView.setEnabled(true);   
-            DefaultTableModel model = new DefaultTableModel(arrData,arrHeadings);
-            jTableObj.setModel(model); //= new JTable(model);
+        // jPanel_Tab_TabularGraphicView.setEnabled(true);   
+        DefaultTableModel model = new DefaultTableModel(arrData, arrHeadings);
+        jTableObj.setModel(model); //= new JTable(model);
     }
-    
+
     private void resetInputForm() {
         filesList.clear();
         jList_listOfFiles.removeAll();
@@ -677,8 +825,10 @@ public class Main extends javax.swing.JFrame {
         jTabbedPaneMain.setEnabledAt(1, false);
         jTabbedPaneMain.setEnabledAt(2, false);
         jTabbedPaneMain.setEnabledAt(3, false);
-        //jTabbedPaneMain.setEnabledAt(4, false);
+        jTabbedPaneMain.setEnabledAt(4, false);
+        setLocationRelativeTo(null);
     }
+
     private void updateFormOnFilesSelected() {
         jList_listOfFiles.setModel(filesList);
         analyseBtn.setEnabled(true);
@@ -688,7 +838,7 @@ public class Main extends javax.swing.JFrame {
         browseBtn.setEnabled(false);
         jPanel_browse.setVisible(false);
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -724,7 +874,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel GUI_bottom_text;
@@ -741,6 +891,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JList<String> jListLeft;
+    private javax.swing.JList<String> jListRight;
     private javax.swing.JList<File> jList_listOfFiles;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -765,16 +917,21 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_browse;
     private javax.swing.JPanel jPanel_listing_files;
     private javax.swing.JPanel jPanel_tab_Anomalies;
+    private javax.swing.JPanel jPanel_tab_CodeFlowGraphicalview;
     private javax.swing.JPanel jPanel_tab_MethodExecutionNumberOfTimes;
     private javax.swing.JPanel jPanel_tab_MethodTimeInvocation;
     private javax.swing.JPanel jPanel_tab_home;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton resetBtn;
     // End of variables declaration//GEN-END:variables
 
