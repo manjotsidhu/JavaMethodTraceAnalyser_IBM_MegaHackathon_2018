@@ -23,12 +23,23 @@
 			<artifactId>jgraphx</artifactId>
 			<version>3.9.8.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.netbeans.external/AbsoluteLayout -->
+		<dependency>
+			<groupId>org.netbeans.external</groupId>
+			<artifactId>AbsoluteLayout</artifactId>
+			<version>RELEASE65</version>
+		</dependency>
+
     </dependencies>
 
     <repositories>
 	<repository>
 	    <id>bt-flowtick-jgraphx</id>
 	    <url>https://dl.bintray.com/flowtick/jgraphx/</url>
+	</repository>
+	<repository>
+	    <id>netbeans</id>
+	    <url>http://bits.netbeans.org/maven2/</url>
 	</repository>
     </repositories>
 </project>

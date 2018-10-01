@@ -75,12 +75,22 @@ public class Main extends javax.swing.JFrame {
         resetBtn = new javax.swing.JButton();
         analyseBtn = new javax.swing.JButton();
         jPanel_tab_1 = new javax.swing.JPanel();
-        jTable1 = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel_tab_2 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jPanel_tab_3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         GUI_top_panel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -295,9 +305,20 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPaneMain.addTab("Input trace logs", jPanel_tab_home);
 
-        jPanel_tab_1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel_tab_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTable1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setText("Method time invocation");
+        jPanel12.add(jLabel2);
+
+        jLabel3.setText("Showing time in milliseconds.");
+        jPanel13.add(jLabel3);
+
+        jPanel2.setMaximumSize(null);
+        jPanel2.setMinimumSize(null);
+
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -313,42 +334,137 @@ public class Main extends javax.swing.JFrame {
         jTable1.setMinimumSize(null);
         jTable1.setName(""); // NOI18N
         jTable1.setPreferredSize(null);
-        jPanel_tab_1.add(jTable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 280, 40));
+        jScrollPane1.setViewportView(jTable1);
 
-        jLabel2.setText("Method time invocation");
-        jPanel2.add(jLabel2);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
+        );
 
-        jPanel_tab_1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 460, 20));
-
-        jLabel3.setText("Table is showing time in milliseconds.");
-        jPanel3.add(jLabel3);
-
-        jPanel_tab_1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 460, 20));
+        javax.swing.GroupLayout jPanel_tab_1Layout = new javax.swing.GroupLayout(jPanel_tab_1);
+        jPanel_tab_1.setLayout(jPanel_tab_1Layout);
+        jPanel_tab_1Layout.setHorizontalGroup(
+            jPanel_tab_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel_tab_1Layout.setVerticalGroup(
+            jPanel_tab_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_tab_1Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         jTabbedPaneMain.addTab("Medtod time invocation", jPanel_tab_1);
+
+        jPanel_tab_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setText("Method executed number of times");
+        jPanel14.add(jLabel4);
+
+        jLabel6.setText("Showing counts how many times each method is executed");
+        jPanel15.add(jLabel6);
+
+        jPanel3.setMaximumSize(null);
+        jPanel3.setMinimumSize(null);
+
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable2.setMaximumSize(null);
+        jTable2.setMinimumSize(null);
+        jTable2.setName(""); // NOI18N
+        jTable2.setPreferredSize(null);
+        jScrollPane2.setViewportView(jTable2);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel_tab_2Layout = new javax.swing.GroupLayout(jPanel_tab_2);
         jPanel_tab_2.setLayout(jPanel_tab_2Layout);
         jPanel_tab_2Layout.setHorizontalGroup(
             jPanel_tab_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel_tab_2Layout.setVerticalGroup(
             jPanel_tab_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(jPanel_tab_2Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jTabbedPaneMain.addTab("Anomalies", jPanel_tab_2);
+        jTabbedPaneMain.addTab("Method executed number of times", jPanel_tab_2);
+
+        javax.swing.GroupLayout jPanel_tab_3Layout = new javax.swing.GroupLayout(jPanel_tab_3);
+        jPanel_tab_3.setLayout(jPanel_tab_3Layout);
+        jPanel_tab_3Layout.setHorizontalGroup(
+            jPanel_tab_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 667, Short.MAX_VALUE)
+        );
+        jPanel_tab_3Layout.setVerticalGroup(
+            jPanel_tab_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 413, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneMain.addTab("Anomalies", jPanel_tab_3);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+            .addGap(0, 667, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 413, Short.MAX_VALUE)
         );
 
         jTabbedPaneMain.addTab("Compare code flow", jPanel4);
@@ -417,15 +533,48 @@ public class Main extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //String arrData[][] = {{"Vinod","100"},{"Raju","200"},{"Ranju","300"}};
-        //String arrHeadings[] = {"Name","code"};
+        /*
+        String arrData[][] = {{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
+                           
+        };
+        
+        String arrHeadings[] = {"Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code"};
         String arrHeadingTooltips[] = {"Name","code"};
+        */
         
-        Object[][] arrData = Tools.toArray(analyse.getAnalysedTime(), (Integer) ((ArrayList) analyse.getAnalysedTime().get(0)).size());
-        System.out.println(Arrays.deepToString(arrData));
-        Object[] arrHeadings = (Object[]) analyse.getLogFiles().toArray();
-        
-        graphicalView(arrData, arrHeadings, arrHeadingTooltips);
+        // tab-1 values
+        Object[][] arrData1 = Tools.toArray(analyse.getAnalysedTime(), (Integer) ((ArrayList) analyse.getAnalysedTime().get(0)).size());
+        Object[] arrHeadings1 = (Object[]) analyse.getLogFiles().toArray();
+        Object[] arrHeadingTooltips1 = (Object[]) analyse.getLogFiles().toArray();
+        graphicalViewTab1(arrData1, arrHeadings1, arrHeadingTooltips1);
+        // tab-2 values
+        Object[][] arrData2 = Tools.toArray(analyse.getanalysedNMethods(), (Integer) ((ArrayList) analyse.getanalysedNMethods().get(0)).size());
+        Object[] arrHeadings2 = (Object[]) analyse.getLogFiles().toArray();
+        Object[] arrHeadingTooltips2 = (Object[]) analyse.getLogFiles().toArray();
+        graphicalViewTab2(arrData2, arrHeadings2, arrHeadingTooltips2);
+        //
     }//GEN-LAST:event_analyseBtnActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -438,11 +587,18 @@ public class Main extends javax.swing.JFrame {
         resetInputForm();
     }//GEN-LAST:event_formWindowOpened
     
-    private void graphicalView(Object[][] arrData, Object[] arrHeadings, String[] arrHeadingTooltips) {
+    private void graphicalViewTab1(Object[][] arrData, Object[] arrHeadings, Object[] arrHeadingTooltips) {
             // jPanel_Tab_TabularGraphicView.setEnabled(true);   
             jTabbedPaneMain.setEnabledAt(1, true);
             DefaultTableModel model = new DefaultTableModel(arrData,arrHeadings);
             jTable1.setModel(model); //= new JTable(model);
+            
+    }
+    private void graphicalViewTab2(Object[][] arrData, Object[] arrHeadings, Object[] arrHeadingTooltips) {
+            // jPanel_Tab_TabularGraphicView.setEnabled(true);   
+            jTabbedPaneMain.setEnabledAt(2, true);
+            DefaultTableModel model = new DefaultTableModel(arrData,arrHeadings);
+            jTable2.setModel(model); //= new JTable(model);
             
     }
     
@@ -518,11 +674,17 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel2_text;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JList<File> jList_listOfFiles;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -537,9 +699,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_listing_files;
     private javax.swing.JPanel jPanel_tab_1;
     private javax.swing.JPanel jPanel_tab_2;
+    private javax.swing.JPanel jPanel_tab_3;
     private javax.swing.JPanel jPanel_tab_home;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JButton resetBtn;
     // End of variables declaration//GEN-END:variables
 
