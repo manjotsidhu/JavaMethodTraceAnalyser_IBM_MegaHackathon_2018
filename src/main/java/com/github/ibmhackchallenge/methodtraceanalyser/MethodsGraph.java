@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.JInternalFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -13,15 +14,15 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.chart.ui.ApplicationFrame;
 import org.jfree.chart.ui.UIUtils;
 
-public class Graph extends ApplicationFrame {
+public class MethodsGraph extends JInternalFrame {
 
-    public Graph(String applicationTitle, String chartTitle) throws IOException {
+    public MethodsGraph(String applicationTitle, String chartTitle, Object[] logFiles, ArrayList analysedTable) throws IOException {
         super(applicationTitle);
         JFreeChart barChart = ChartFactory.createBarChart(
                 chartTitle,
                 "Method Names",
-                "Time Taken (in ms)",
-                createDataset(),
+                "Number of times method executed",
+                createDataset(logFiles, analysedTable),
                 PlotOrientation.VERTICAL,
                 true, true, false);
 
@@ -30,17 +31,10 @@ public class Graph extends ApplicationFrame {
         setContentPane(chartPanel);
     }
 
-    private CategoryDataset createDataset() throws IOException {
-
-        File[] in = new File[2];
-        in[0] = new File("sample_logs/logfile1a");
-        in[1] = new File("sample_logs/logfile1c");
-        //in[1] = new File("sample_logs/logfile1c");
-        Analyser analyse = new Analyser(in);
-
-        Object[] labels = analyse.getLogFiles().toArray();
-
-        Object[][] time = Tools.toArray(analyse.getGraphAnalysedTime(), ((ArrayList) analyse.getGraphAnalysedTime().get(0)).size());
+    private CategoryDataset createDataset(Object[] logFiles, ArrayList analysedTable) throws IOException {
+        //System.out.println(Arrays.deepToString(logFiles.toArray()));
+        Object[] labels = logFiles;
+        Object[][] time = Tools.toArray(analysedTable, ((ArrayList) analysedTable.get(0)).size());
         
         final DefaultCategoryDataset dataset
                 = new DefaultCategoryDataset();
@@ -51,17 +45,9 @@ public class Graph extends ApplicationFrame {
         // dataset.addValue(yVal (time), xLabel (logfiles), xVal (method))
         for(Object[] element: time) {
             for(int i = 1; i < labels.length; i++) {
-                dataset.addValue( (Long) element[i],(String) labels[i],((String) element[0]));
+                dataset.addValue( (Integer) element[i],(String) labels[i],((String) element[0]));
             }
         }
         return dataset;
-    }
-
-    public static void main(String[] args) throws IOException {
-        Graph chart = new Graph("Method Time Invocation",
-                "Method Time Invocation");
-        chart.pack();
-        UIUtils.centerFrameOnScreen(chart);
-        chart.setVisible(true);
     }
 }

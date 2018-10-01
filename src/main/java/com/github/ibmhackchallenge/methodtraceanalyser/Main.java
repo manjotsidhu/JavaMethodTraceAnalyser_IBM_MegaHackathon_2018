@@ -19,6 +19,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -26,6 +28,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ui.UIUtils;
 
 /**
  *
@@ -734,12 +737,14 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getSource() == browseBtn) {
             // File Chooser (Browse Tab)
-            
+
             JFileChooser chooser = new JFileChooser();
             chooser.setMultiSelectionEnabled(true);
             chooser.setCurrentDirectory(SampleLogFilesFolder);
             int result = chooser.showOpenDialog(GUI_main_panel);
-            if (result != JFileChooser.APPROVE_OPTION) return;
+            if (result != JFileChooser.APPROVE_OPTION) {
+                return;
+            }
             logFiles = chooser.getSelectedFiles();
             filesList = new DefaultListModel<>();
             boolean isFileSelected = false;
@@ -751,7 +756,7 @@ public class Main extends javax.swing.JFrame {
                 analyseBtn.setEnabled(true);
                 updateFormOnFilesSelected();
             }
-            
+
         }
     }//GEN-LAST:event_browseBtnActionPerformed
 
@@ -767,7 +772,7 @@ public class Main extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         /*
         String arrData[][] = {{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}
                 ,{"Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300","Vinod","100","Raju","200","Ranju","300"}                
@@ -798,9 +803,8 @@ public class Main extends javax.swing.JFrame {
         String arrHeadings[] = {"Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code","Name","code"};
         String arrHeadingTooltips[] = {"Name","code"};
          */
-
         // tab-1 values
-        Object[][] arrData1 = Tools.toArray(analyse.getAnalysedTime(), (Integer) ((ArrayList) analyse.getAnalysedTime().get(0)).size());
+        Object[][] arrData1 = Tools.toArray(analyse.getGraphAnalysedTime(), (Integer) ((ArrayList) analyse.getGraphAnalysedTime().get(0)).size());
         Object[] arrHeadings1 = (Object[]) analyse.getLogFiles().toArray();
         Object[] arrHeadingTooltips1 = (Object[]) analyse.getLogFiles().toArray();
         graphicalViewTab(jTable1, arrData1, arrHeadings1, arrHeadingTooltips1);
@@ -816,10 +820,11 @@ public class Main extends javax.swing.JFrame {
         graphicalViewTab(jTable3, arrData3, arrHeadings3, arrHeadingTooltips3);
         // tab-4 code flow compare graph
 
+        Object[] graphLogFiles = (Object[]) analyse.getLogFiles().toArray();
         ArrayList flowLogFiles = analyse.getLogFiles();
-        //System.out.println(Arrays.deepToString(flowLogFiles.toArray()));
+        System.out.println(Arrays.deepToString(flowLogFiles.toArray()));
         flowLogFiles.remove(0);
-        
+
         Object[] arrHeadings4 = (Object[]) flowLogFiles.toArray();
         DefaultListModel model4 = new DefaultListModel();
         jListLeft.removeAll();
@@ -828,7 +833,6 @@ public class Main extends javax.swing.JFrame {
         for (int index = 0; index < arrHeadings4.length; index++) {
             model4.add(index, arrHeadings4[index]);
         }
-        
 
         Object[] arrHeadings5 = (Object[]) flowLogFiles.toArray();
         DefaultListModel model5 = new DefaultListModel();
@@ -839,23 +843,25 @@ public class Main extends javax.swing.JFrame {
             model5.add(index, arrHeadings5[index]);
         }
 
-        int leftIndex=0;
+        int leftIndex = 0;
         jListLeft.setSelectedIndex(leftIndex);
         ArrayList text1 = (ArrayList) (((ArrayList) analyse.getLogText()).get(leftIndex));
         ArrayList sequence1 = (ArrayList<Integer>) (((ArrayList) analyse.getLogSequence()).get(leftIndex));
         leftFrame.removeAll();
         try {
-            leftFrame = new CodeFlow(text1, sequence1,(String) arrHeadings5[leftIndex]);
+            leftFrame = new CodeFlow(text1, sequence1, (String) arrHeadings5[leftIndex]);
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         jSplitPane1.setLeftComponent(leftFrame);
         leftFrame.updateUI();
         leftFrame.setVisible(true);
-        
-        int rightIndex=0;
-        if (arrHeadings5.length>1) rightIndex=1;
-        
+
+        int rightIndex = 0;
+        if (arrHeadings5.length > 1) {
+            rightIndex = 1;
+        }
+
         jListRight.setSelectedIndex(rightIndex);
         ArrayList text2 = (ArrayList) (((ArrayList) analyse.getLogText()).get(rightIndex));
         ArrayList sequence2 = (ArrayList<Integer>) (((ArrayList) analyse.getLogSequence()).get(rightIndex));
@@ -868,20 +874,48 @@ public class Main extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(rightFrame);
         rightFrame.updateUI();
         rightFrame.setVisible(true);
-        
-        if (arrHeadings5.length>1) {
+
+        if (arrHeadings5.length > 1) {
             rightFrame.setVisible(true);
             jListRight.setVisible(true);
             jLabel1Right.setVisible(true);
             jScrollPaneListRight.setVisible(true);
-        }
-        else
-        {   rightFrame.setVisible(false);
+        } else {
+            rightFrame.setVisible(false);
             jListRight.setVisible(false);
             jLabel1Right.setVisible(false);
             jScrollPaneListRight.setVisible(false);
         }
+
+        // Time Invocation Graph
+        TimeInvocationGraph chart;
+        try {
+            System.out.println(Arrays.deepToString(analyse.getLogFiles().toArray()));
+            chart = new TimeInvocationGraph("Method Time Invocation",
+                    "Method Time Invocation", graphLogFiles, analyse.getGraphAnalysedTime());
+            chart.pack();
+            chart.setMaximizable(true);
+            jPanel_graph_timeInvocation.add(chart);
+            chart.setVisible(true);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+        // Number of times Methods Executed Graph
+        MethodsGraph chart1;
+        try {
+            chart1 = new MethodsGraph("Number of Times Method executed",
+                    "Number of Times Method executed", graphLogFiles, analyse.getanalysedNMethods());
+            chart1.pack();
+            chart1.setMaximizable(true);
+            jPanel_graph_executedNumberOfTimes.add(chart1);
+            chart1.setVisible(true);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         //
         jTabbedPaneMain.setEnabledAt(1, true);
         jTabbedPaneMain.setEnabledAt(2, true);
@@ -904,13 +938,15 @@ public class Main extends javax.swing.JFrame {
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         jSplitPane1.setDividerLocation(jSplitPane1.getWidth() / 2);
     }//GEN-LAST:event_formComponentResized
-    private void splitPaneSplitRefresh() {  
+    private void splitPaneSplitRefresh() {
         jSplitPane1.setDividerLocation(jSplitPane1.getWidth() / 2);
     }
     private void jListLeftValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListLeftValueChanged
-        
+
         int index = jListLeft.getSelectedIndex();
-        if(index < 0) return;
+        if (index < 0) {
+            return;
+        }
         System.out.println(index);
         //System.out.println(Arrays.deepToString(analyse.getLogText().toArray()));
         ArrayList text = (ArrayList) (((ArrayList) analyse.getLogText()).get(index));
@@ -927,7 +963,9 @@ public class Main extends javax.swing.JFrame {
 
     private void jListRightValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListRightValueChanged
         int index = jListRight.getSelectedIndex();
-        if(index < 0) return;
+        if (index < 0) {
+            return;
+        }
         ArrayList text = (ArrayList) (((ArrayList) analyse.getLogText()).get(index));
         ArrayList sequence = (ArrayList<Integer>) (((ArrayList) analyse.getLogSequence()).get(jListRight.getSelectedIndex()));
         try {
@@ -953,7 +991,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void resetInputForm() {
-        
+
         filesList.clear();
         jList_listOfFiles.removeAll();
         jListLeft.removeAll();
