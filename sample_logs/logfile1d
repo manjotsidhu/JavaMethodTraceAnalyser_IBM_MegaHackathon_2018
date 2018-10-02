@@ -1,8 +1,0 @@
-12:03:46.467*0x192b700      HelloWorld.2         - Event id 1, text = Trace initialized
-12:03:46.467 0x192b700      HelloWorld.0         > Entering sayHello
-Hello
-12:03:46.467 0x192b700      HelloWorld.1         < Exiting sayHello
-12:03:46.467 0x192b700      HelloWorld.0         > Entering sayGoodbye
-Bye
-12:03:46.467 0x192b700      HelloWorld.1         < Exiting sayGoodbye
-12:03:46.468 0x192b700      HelloWorld.0         > Entering sayComplex
