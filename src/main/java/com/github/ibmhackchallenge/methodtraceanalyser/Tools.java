@@ -157,4 +157,19 @@ public class Tools {
 
         return 0;
     }
+    
+    /**
+     * 
+     */
+    public static void extendArrayLength(ArrayList arr, int length) {
+        while(arr.size() < length ) {
+            arr.add(null);
+        }
+    }
+    
+    public static void extendArrayIndex(ArrayList arr, int index) {
+        while(arr.size() < index+1) {
+            arr.add(null);
+        }
+    }
 }

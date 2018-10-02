@@ -156,7 +156,9 @@ public class Analyser {
 
         for (int iteration = 1; iteration <= methods.size(); iteration++) {
             int timeIndex = Tools.find(parsedSequence, 0, iteration);
-            results.add(Tools.find(methods, 0, (String) parsedText.get(timeIndex)), Tools.count(parsedText, (String) parsedText.get(timeIndex)));
+            int index = Tools.find(methods, 0, (String) parsedText.get(timeIndex));
+            Tools.extendArrayIndex(results, index);
+            results.set(index, Tools.count(parsedText, (String) parsedText.get(timeIndex)));
         }
 
         analysedNMethods.add(results);

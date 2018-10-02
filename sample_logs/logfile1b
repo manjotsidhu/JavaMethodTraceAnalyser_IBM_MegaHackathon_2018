@@ -5,4 +5,10 @@ Hello
 Bye
 03:35:59.198 0x1ff4700      HelloWorld.1         < Exiting sayGoodbye
 03:35:59.199 0x1ff4700      HelloWorld.0         > Entering sayComplex
-03:35:59.200 0x1ff4700      HelloWorld.1         < Exiting sayComplex
+03:35:59.200 0x1ff4700      HelloWorld.0          > Entering sayHello
+Hello
+03:35:59.201 0x1ff4700      HelloWorld.1          < Exiting sayHello
+03:35:59.202 0x1ff4700      HelloWorld.0          > Entering sayGoodbye
+Bye
+03:35:59.203 0x1ff4700      HelloWorld.1          < Exiting sayGoodbye
+03:35:59.204 0x1ff4700      HelloWorld.1         < Exiting sayComplex

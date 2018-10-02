@@ -119,11 +119,9 @@ public class Main extends javax.swing.JFrame {
         jPanel17 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel18 = new javax.swing.JPanel();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel22 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jPanel_graph_anomalies = new javax.swing.JPanel();
         GUI_top_panel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -644,36 +642,23 @@ public class Main extends javax.swing.JFrame {
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
         );
-
-        jTabbedPane3.addTab("Data table", jPanel22);
-
-        javax.swing.GroupLayout jPanel_graph_anomaliesLayout = new javax.swing.GroupLayout(jPanel_graph_anomalies);
-        jPanel_graph_anomalies.setLayout(jPanel_graph_anomaliesLayout);
-        jPanel_graph_anomaliesLayout.setHorizontalGroup(
-            jPanel_graph_anomaliesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
-        );
-        jPanel_graph_anomaliesLayout.setVerticalGroup(
-            jPanel_graph_anomaliesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
-        );
-
-        jTabbedPane3.addTab("Show graph", jPanel_graph_anomalies);
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane3)
-                .addContainerGap())
+                .addGap(0, 12, Short.MAX_VALUE)
+                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 13, Short.MAX_VALUE))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane3)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                .addGap(0, 14, Short.MAX_VALUE)
+                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel_tab_AnomaliesLayout = new javax.swing.GroupLayout(jPanel_tab_Anomalies);
@@ -769,7 +754,7 @@ public class Main extends javax.swing.JFrame {
     private void analyseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analyseBtnActionPerformed
         try {
             analyse = new Analyser(logFiles);
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -814,8 +799,13 @@ public class Main extends javax.swing.JFrame {
         Object[] arrHeadingTooltips2 = (Object[]) analyse.getLogFiles().toArray();
         graphicalViewTab(jTable2, arrData2, arrHeadings2, arrHeadingTooltips2);
         // tab-3 values
-        Object[][] arrData3 = Tools.toArray(analyse.getanalysedNMethods(), (Integer) ((ArrayList) analyse.getanalysedNMethods().get(0)).size());
-        Object[] arrHeadings3 = (Object[]) analyse.getLogFiles().toArray();
+        
+        ArrayList anomaliesLogFiles = new ArrayList();
+        anomaliesLogFiles.add("Anomaly Type");
+        anomaliesLogFiles.add("Method Starting");
+        anomaliesLogFiles.add("");
+        Object[][] arrData3 = Tools.toArray(analyse.getAnomalies(), (Integer) ((ArrayList) analyse.getAnomalies().get(0)).size());
+        Object[] arrHeadings3 = (Object[]) anomaliesLogFiles.toArray();
         Object[] arrHeadingTooltips3 = (Object[]) analyse.getLogFiles().toArray();
         graphicalViewTab(jTable3, arrData3, arrHeadings3, arrHeadingTooltips3);
         // tab-4 code flow compare graph
@@ -1103,7 +1093,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanel_InputForm_buttons;
     private javax.swing.JPanel jPanel_browse;
-    private javax.swing.JPanel jPanel_graph_anomalies;
     private javax.swing.JPanel jPanel_graph_executedNumberOfTimes;
     private javax.swing.JPanel jPanel_graph_timeInvocation;
     private javax.swing.JPanel jPanel_listing_files;
@@ -1120,7 +1109,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
