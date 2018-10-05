@@ -1,0 +1,83 @@
+                Trace Summary
+
+Service Level :
+        JRE 1.8.0 Linux amd64-64 (build 1.8.0_181-b13)
+
+JVM Start-up Params :
+-Xoptionsfile=/home/manjotsidhu/openjdk8/jre/lib/amd64/compressedrefs/options.default
+-Xlockword:mode=default,noLockword=java/lang/String,noLockword=java/util/MapEntry,noLockword=java/util/HashMap$Entry,noLockword=org/apache/harmony/luni/util/ModifiedMap$Entry,noLockword=java/util/Hashtable$Entry,noLockword=java/lang/invoke/MethodType,noLockword=java/lang/invoke/MethodHandle,noLockword=java/lang/invoke/CollectHandle,noLockword=java/lang/invoke/ConstructorHandle,noLockword=java/lang/invoke/ConvertHandle,noLockword=java/lang/invoke/ArgumentConversionHandle,noLockword=java/lang/invoke/AsTypeHandle,noLockword=java/lang/invoke/ExplicitCastHandle,noLockword=java/lang/invoke/FilterReturnHandle,noLockword=java/lang/invoke/DirectHandle,noLockword=java/lang/invoke/ReceiverBoundHandle,noLockword=java/lang/invoke/DynamicInvokerHandle,noLockword=java/lang/invoke/FieldHandle,noLockword=java/lang/invoke/FieldGetterHandle,noLockword=java/lang/invoke/FieldSetterHandle,noLockword=java/lang/invoke/StaticFieldGetterHandle,noLockword=java/lang/invoke/StaticFieldSetterHandle,noLockword=java/lang/invoke/IndirectHandle,noLockword=java/lang/invoke/InterfaceHandle,noLockword=java/lang/invoke/VirtualHandle,noLockword=java/lang/invoke/PrimitiveHandle,noLockword=java/lang/invoke/InvokeExactHandle,noLockword=java/lang/invoke/InvokeGenericHandle,noLockword=java/lang/invoke/VarargsCollectorHandle,noLockword=java/lang/invoke/ThunkTuple
+-Xjcl:jclse7b_29
+-Dcom.ibm.oti.vm.bootstrap.library.path=/home/manjotsidhu/openjdk8/jre/lib/amd64/compressedrefs:/home/manjotsidhu/openjdk8/jre/lib/amd64
+-Dsun.boot.library.path=/home/manjotsidhu/openjdk8/jre/lib/amd64/compressedrefs:/home/manjotsidhu/openjdk8/jre/lib/amd64
+-Djava.library.path=/home/manjotsidhu/openjdk8/jre/lib/amd64/compressedrefs:/home/manjotsidhu/openjdk8/jre/lib/amd64:/usr/lib64:/usr/lib
+-Djava.home=/home/manjotsidhu/openjdk8/jre
+-Djava.ext.dirs=/home/manjotsidhu/openjdk8/jre/lib/ext
+-Duser.dir=/home/manjotsidhu/eclipse-workspace/IBMHackChallenge/src/testProject
+-Djava.class.path=.
+-Xtrace:none
+-Xtrace:methods=java/util/Scanner*,trigger=method{java/util/Scanner.*,jstacktrace},maximal=mt,output=scanner.trc
+-Dsun.java.command=ftw
+-Dsun.java.launcher=SUN_STANDARD
+-Dsun.java.launcher.pid=13964
+
+
+Activation Info :
+        FORMAT=/home/manjotsidhu/openjdk8/jre/lib;.
+        MAXIMAL=all{level1}
+        EXCEPTION=j9mm{gclogger}
+        MAXIMAL=all{level2}
+        none
+        methods=java/util/Scanner*
+        trigger={method{java/util/Scanner.*,jstacktrace}}
+        maximal=mt
+        output=scanner.trc
+
+Sys Processor Info :
+        Arch family AMD64
+        Processor Sub-type Opteron
+        Num Processors 4
+        Big Endian false
+        Word size 64
+        Using Trace Counter J9 timer
+
+Active Threads :
+        0x1fa6700  main
+
+JVM started      : 14:58:54.097000000
+
+Last buffer write: 14:58:54.255147410
+
+First tracepoint:  14:58:54.211300796
+
+Last tracepoint :  14:58:54.255147410
+
+
+                Trace Formatted Data 
+
+J9 timer(UTC)        ThreadID               TP id     Type        TraceEntry 
+14:58:54.211307768          *0x1fa6700         mt.3    Entry      >java/util/Scanner.<clinit>()V bytecode static method
+14:58:54.211309760           0x1fa6700  j9trc_aux.0    Event       jstacktrace:
+14:58:54.211315737           0x1fa6700  j9trc_aux.1    Event       [1] java.util.Scanner.<clinit> (Scanner.java:304)
+14:58:54.211317729           0x1fa6700  j9trc_aux.1    Event       [2] ftw.main (ftw.java:32)
+14:58:54.216931274           0x1fa6700         mt.9    Exit       <java/util/Scanner.<clinit>()V bytecode static method
+14:58:54.216998007           0x1fa6700         mt.0    Entry      >java/util/Scanner.<init>(Ljava/io/InputStream;)V bytecode method, this = 0xffe45820
+14:58:54.216999003           0x1fa6700  j9trc_aux.0    Event       jstacktrace:
+14:58:54.217004980           0x1fa6700  j9trc_aux.1    Event       [1] java.util.Scanner.<init> (Scanner.java:563)
+14:58:54.217006972           0x1fa6700  j9trc_aux.1    Event       [2] ftw.main (ftw.java:32)
+14:58:54.217041832           0x1fa6700         mt.0    Entry      >java/util/Scanner.<init>(Ljava/lang/Readable;Ljava/util/regex/Pattern;)V bytecode method, this = 0xffe45820
+14:58:54.217042828           0x1fa6700  j9trc_aux.0    Event       jstacktrace:
+14:58:54.217043824           0x1fa6700  j9trc_aux.1    Event       [1] java.util.Scanner.<init> (Scanner.java:530)
+14:58:54.217045816           0x1fa6700  j9trc_aux.1    Event       [2] java.util.Scanner.<init> (Scanner.java:563)
+14:58:54.217046812           0x1fa6700  j9trc_aux.1    Event       [3] ftw.main (ftw.java:32)
+14:58:54.217222111           0x1fa6700         mt.0    Entry      >java/util/Scanner$1.<init>(Ljava/util/Scanner;I)V bytecode method, this = 0xffe540b0
+14:58:54.217232071           0x1fa6700         mt.6    Exit       <java/util/Scanner$1.<init>(Ljava/util/Scanner;I)V bytecode method
+14:58:54.217964143           0x1fa6700         mt.0    Entry      >java/util/Scanner.useLocale(Ljava/util/Locale;)Ljava/util/Scanner; bytecode method, this = 0xffe45820
+14:58:54.217965139           0x1fa6700  j9trc_aux.0    Event       jstacktrace:
+14:58:54.217968127           0x1fa6700  j9trc_aux.1    Event       [1] java.util.Scanner.useLocale (Scanner.java:1181)
+14:58:54.217970119           0x1fa6700  j9trc_aux.1    Event       [2] java.util.Scanner.<init> (Scanner.java:540)
+14:58:54.217971115           0x1fa6700  j9trc_aux.1    Event       [3] java.util.Scanner.<init> (Scanner.java:563)
+14:58:54.217972111           0x1fa6700  j9trc_aux.1    Event       [4] ftw.main (ftw.java:32)
+14:58:54.255109561           0x1fa6700         mt.6    Exit       <java/util/Scanner.useLocale(Ljava/util/Locale;)Ljava/util/Scanner; bytecode method
+14:58:54.255111553           0x1fa6700         mt.6    Exit       <java/util/Scanner.<init>(Ljava/lang/Readable;Ljava/util/regex/Pattern;)V bytecode method
+14:58:54.255112549           0x1fa6700         mt.6    Exit       <java/util/Scanner.<init>(Ljava/io/InputStream;)V bytecode method
+14:58:54.255147410           0x1fa6700         dg.262  Debug       ***** Thread termination - trace purged *****

@@ -52,17 +52,17 @@ public class Parser {
         //System.out.println("Parsing file: " + logFile.getAbsolutePath());
         String log = FileUtils.readFileToString(logFile);
 
-        Pattern pattern1 = Pattern.compile("(\\d+:\\d+:\\d+.\\d+)(\\s+)?([*|\\s])(\\w+)(\\s+)(\\w+)(\\.)(\\d+)(\\s+(\\w+\\s+)?((.+)?)([<>])\\s?)([^\\n\\r\\]]+)(\\n\\s+(.+))?");
-        Matcher matcher1 = pattern1.matcher(log);
+        Pattern logPattern = Pattern.compile("(\\d+:\\d+:\\d+.\\d+)(\\s+)?([*|\\s])(\\w+)(\\s+)(\\w+)(\\.)(\\d+)(\\s+(\\w+\\s+)?(([^\\n\\r\\>\\<\\]\\[]+)?)([<>])\\s?)([^\\n\\r\\]]+)(\\n\\s+(.+))?");
+        Matcher logMatcher = logPattern.matcher(log);
 
         int methodId = 0;
         ArrayList<Integer> BufferId = new ArrayList<>();
 
-        while (matcher1.find()) {
-            methodTime.add(matcher1.group(1));
-            String additionalText = (matcher1.group(16) != null) ? " " + matcher1.group(16) : "";
-            methodText.add(matcher1.group(14) + additionalText);
-            eventType.add(findEventType(matcher1.group(13)));
+        while (logMatcher.find()) {
+            methodTime.add(logMatcher.group(1));
+            String additionalText = (logMatcher.group(16) != null) ? " " + logMatcher.group(16) : "";
+            methodText.add(logMatcher.group(14) + additionalText);
+            eventType.add(findEventType(logMatcher.group(13)));
 
             switch (eventType.get(eventType.size() - 1)) {
                 case 0:
