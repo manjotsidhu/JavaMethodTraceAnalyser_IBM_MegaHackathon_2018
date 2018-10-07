@@ -27,6 +27,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ui.UIUtils;
 
@@ -784,14 +785,13 @@ public class Main extends javax.swing.JFrame {
         try {
             
             //this.add(BorderLayout.CENTER, dlg);
-            jLabelProcessingWait.setText("Processing..plese wait for few seconds..");
-            //this.doLayout();
-            //this.getContentPane().validate();
+            //jLabelProcessingWait.setText("Processing..plese wait for few seconds..");
+            JOptionPane.showMessageDialog(this,"Processing may take few seconds...\nPlease press OK to continue..","Analyser", JOptionPane.INFORMATION_MESSAGE);                 
             analyse = new Analyser(logFiles);
-            Thread.sleep(2000);
- 
-            jLabelProcessingWait.setText("");
-            //this.getContentPane().validate();
+            //Thread.sleep(2000);
+            JOptionPane.showMessageDialog(this,"Analysing completed\nOutput will be ready in all above enabled tabs\nPlease press OK to continue...","Analyser", JOptionPane.INFORMATION_MESSAGE);                 
+            //jLabelProcessingWait.setText("");
+            
            // JDialog_Processing.
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
