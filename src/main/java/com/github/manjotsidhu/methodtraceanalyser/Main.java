@@ -803,7 +803,7 @@ public class Main extends javax.swing.JFrame {
         anomaliesLogFiles.add("Anomaly Type");
         anomaliesLogFiles.add("Method Starting");
         anomaliesLogFiles.add("");
-        Object[][] arrData3 = Tools.toArray(analyse.getAnomalies(), (Integer) ((ArrayList) analyse.getAnomalies().get(0)).size());
+        Object[][] arrData3 = Tools.toArray(analyse.getanalysedNMethods(), (Integer) ((ArrayList) analyse.getanalysedNMethods().get(0)).size());
         Object[] arrHeadings3 = (Object[]) anomaliesLogFiles.toArray();
         Object[] arrHeadingTooltips3 = (Object[]) analyse.getLogFiles().toArray();
         graphicalViewTab(jTable3, arrData3, arrHeadings3, arrHeadingTooltips3);

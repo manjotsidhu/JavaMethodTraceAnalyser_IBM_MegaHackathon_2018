@@ -22,8 +22,9 @@ import java.util.regex.*;
 import org.apache.commons.io.FileUtils;
 
 /**
- * Parses IBM formatted trace log and returns required data to be used for Analyser.
- * 
+ * Parses IBM formatted trace log and returns required data to be used for
+ * Analyser.
+ *
  * @author Manjot Sidhu
  */
 public class Parser {
@@ -59,10 +60,12 @@ public class Parser {
         ArrayList<Integer> BufferId = new ArrayList<>();
 
         while (logMatcher.find()) {
-            methodTime.add(logMatcher.group(1));
-            String additionalText = (logMatcher.group(16) != null) ? " " + logMatcher.group(16) : "";
-            methodText.add(logMatcher.group(14) + additionalText);
-            eventType.add(findEventType(logMatcher.group(13)));
+            if (findEventType(logMatcher.group(13)) == 0 || findEventType(logMatcher.group(13)) == 1) {
+                methodTime.add(logMatcher.group(1));
+                String additionalText = (logMatcher.group(16) != null) ? " " + logMatcher.group(16) : "";
+                methodText.add(logMatcher.group(14) + additionalText);
+                eventType.add(findEventType(logMatcher.group(13)));
+            }
 
             switch (eventType.get(eventType.size() - 1)) {
                 case 0:
