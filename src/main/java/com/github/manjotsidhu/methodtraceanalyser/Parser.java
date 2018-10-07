@@ -63,18 +63,20 @@ public class Parser {
         ArrayList<Integer> BufferId = new ArrayList<>();
 
         while (logMatcher.find()) {
-            methodTime.add(logMatcher.group(1));
-            String additionalText = (logMatcher.group(16) != null) ? " " + logMatcher.group(16) : "";
-            methodText.add(logMatcher.group(14) + additionalText);
-            eventType.add(findEventType(logMatcher.group(13)));
+            if (findEventType(logMatcher.group(13)) == 0 || findEventType(logMatcher.group(13)) == 1) {
+                methodTime.add(logMatcher.group(1));
+                String additionalText = (logMatcher.group(16) != null) ? " " + logMatcher.group(16) : "";
+                methodText.add(logMatcher.group(14) + additionalText);
+                eventType.add(findEventType(logMatcher.group(13)));
+                String jstacktrace = (logMatcher.group(20) != null) ? logMatcher.group(20).replaceAll("(.+)(\\[\\d+\\](.+))", "$2") : null;
+                methodJStackTrace.add(jstacktrace);
+            }
 
             switch (eventType.get(eventType.size() - 1)) {
                 case 0:
                     methodId++;
                     BufferId.add(methodId);
                     methodSequence.add(methodId);
-                    String jstacktrace = (logMatcher.group(20) != null) ? logMatcher.group(20).replaceAll("(.+)(\\[\\d+\\](.+))", "$2") : logMatcher.group(20);
-                    methodJStackTrace.add(jstacktrace);
                     //System.out.println("Found method, " + methodText.get(methodText.size() - 1)
                     //        + " assigning method id: " + methodId);
                     break;
@@ -86,7 +88,7 @@ public class Parser {
             }
 
         }
-        //System.out.println("Methods found " + (int) (methodId));
+        System.out.println("Methods found " + (int) (methodId));
         //System.out.println(methodJStackTrace.toString());
         return parsedLog;
     }
