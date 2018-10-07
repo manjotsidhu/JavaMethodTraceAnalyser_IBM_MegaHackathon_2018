@@ -68,6 +68,8 @@ public class Parser {
                 String additionalText = (logMatcher.group(16) != null) ? " " + logMatcher.group(16) : "";
                 methodText.add(logMatcher.group(14) + additionalText);
                 eventType.add(findEventType(logMatcher.group(13)));
+                String jstacktrace = (logMatcher.group(20) != null) ? logMatcher.group(20).replaceAll("(.+)(\\[\\d+\\](.+))", "$2") : null;
+                methodJStackTrace.add(jstacktrace);
             }
 
             switch (eventType.get(eventType.size() - 1)) {
@@ -75,8 +77,6 @@ public class Parser {
                     methodId++;
                     BufferId.add(methodId);
                     methodSequence.add(methodId);
-                    String jstacktrace = (logMatcher.group(20) != null) ? logMatcher.group(20).replaceAll("(.+)(\\[\\d+\\](.+))", "$2") : logMatcher.group(20);
-                    methodJStackTrace.add(jstacktrace);
                     //System.out.println("Found method, " + methodText.get(methodText.size() - 1)
                     //        + " assigning method id: " + methodId);
                     break;

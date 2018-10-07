@@ -39,6 +39,8 @@ public class Analyser {
     private final ArrayList analysedNMethods = new ArrayList();
     private final ArrayList<String> logFiles = new ArrayList();
 
+    private final ArrayList analysedJST = new ArrayList();
+
     Analyser(File[] files) throws IOException {
         analysedTime.add(analysedTimeMethods);
         logFiles.add("Methods");
@@ -53,12 +55,15 @@ public class Analyser {
             ArrayList<Integer> parsedSequence = (ArrayList) parsedLog.get(2);
             this.logSequence.add(parsedSequence);
             Integer nMethods = parsedSequence.size() / 2;
+            ArrayList<String> parsedJST = (ArrayList<String>) parsedLog.get(4);
 
             analyseTime(nMethods, parsedTime, parsedText, parsedSequence);
             analyseNMethods(parsedText, parsedSequence, firstItr, nMethods);
+            analyseJStackTrace(parsedJST, parsedSequence, parsedText, nMethods, firstItr);
             logFiles.add(file.getName());
             firstItr = false;
         }
+        System.out.println(Arrays.deepToString(getAnalysedJST().toArray()));
     }
 
     /**
@@ -127,7 +132,33 @@ public class Analyser {
         analysedNMethods.add(aryResults);
     }
 
-    
+    /**
+     * 
+     */
+    public void analyseJStackTrace(ArrayList<String> parsedJST, ArrayList parsedSequence, ArrayList parsedText, int nMethods, boolean firstItr) {
+        ArrayList results = new ArrayList();
+        ArrayList<String> methodNames = analysedTimeMethods;
+        
+        if(firstItr) {
+            analysedJST.add(methodNames);
+        }
+        
+        for(int method = 1; method <= nMethods; method++) {
+            int index = Tools.find(parsedSequence, 0, method);
+            String stackTrace = (String) parsedJST.get(index);
+            
+            if(methodNames.contains((String) parsedText.get(index))) {
+                int methodIndex = Tools.find(methodNames, 0, (String) parsedText.get(index));
+                Tools.extendArrayIndex(results, methodIndex);
+                results.set(methodIndex, stackTrace);
+            } else {
+                methodNames.add((String) parsedText.get(index));
+                results.add(stackTrace);
+            }
+        }
+        
+        analysedJST.add(results);
+    }
 
     /**
      * Returns the results of time taken by methods which is stored in a private
@@ -173,5 +204,12 @@ public class Analyser {
      */
     public ArrayList getLogText() {
         return logText;
+    }
+    
+    /**
+     * 
+     */
+    public ArrayList getAnalysedJST() {
+        return analysedJST;
     }
 }
