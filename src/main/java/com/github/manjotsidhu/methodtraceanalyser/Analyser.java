@@ -114,22 +114,29 @@ public class Analyser {
      * {@link com.github.ibmhackchallenge.methodtraceanalyser.parser}
      */
     private void analyseNMethods(ArrayList parsedText, ArrayList parsedSequence, boolean firstItr, int nMethods) {
-        ArrayList aryResults = new ArrayList();
-        ArrayList<String> methods = analysedTimeMethods;
+        ArrayList results = new ArrayList();
+        ArrayList<String> methodNames = analysedTimeMethods;
 
         if (firstItr) {
-            analysedNMethods.add(methods);
+            analysedNMethods.add(methodNames);
         }
 
-        for (int iteration = 1; iteration <= nMethods; iteration++) {
-            int timeIndex = Tools.find(parsedSequence, 0, iteration);
-            int index = Tools.find(methods, 0, (String) parsedText.get(timeIndex));
-            int count = Tools.count(parsedText, (String) parsedText.get(timeIndex)) / 2;
-            Tools.extendArrayIndex(aryResults, index);
-            aryResults.set(index, count);
+        for (int method = 1; method <= nMethods; method++) {
+            int firstIndex = Tools.find(parsedSequence, 0, method);
+            int count = Tools.count(parsedSequence, method) / 2;
+            String methodName =  (String) parsedText.get(firstIndex);
+            
+            if(methodNames.contains(methodName)) {
+                int methodIndex = Tools.find(methodNames, 0, (String) parsedText.get(firstIndex));
+                results.add(methodIndex, count);
+            } else {
+                methodNames.add(methodName);
+                results.add(count);
+            }
+            
         }
 
-        analysedNMethods.add(aryResults);
+        analysedNMethods.add(results);
     }
 
     /**
