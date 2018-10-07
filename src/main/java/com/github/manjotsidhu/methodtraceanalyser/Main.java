@@ -84,8 +84,6 @@ public class Main extends javax.swing.JFrame {
         jPanel_InputForm_buttons = new javax.swing.JPanel();
         resetBtn = new javax.swing.JButton();
         analyseBtn = new javax.swing.JButton();
-        jPanelProcessingMessage = new javax.swing.JPanel();
-        jLabelProcessingWait = new javax.swing.JLabel();
         jPanel_tab_CodeFlowGraphicalview = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPaneListRight = new javax.swing.JScrollPane();
@@ -127,6 +125,9 @@ public class Main extends javax.swing.JFrame {
         jPanel22 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        jPanel21 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextAreaCellDetail = new javax.swing.JTextArea();
         GUI_top_panel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -348,31 +349,6 @@ public class Main extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         jPanel5_main.add(jPanel_InputForm_buttons, gridBagConstraints);
-
-        jLabelProcessingWait.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabelProcessingWait.setForeground(new java.awt.Color(255, 51, 51));
-        jLabelProcessingWait.setText("Processing....please wait for few seconds...");
-
-        javax.swing.GroupLayout jPanelProcessingMessageLayout = new javax.swing.GroupLayout(jPanelProcessingMessage);
-        jPanelProcessingMessage.setLayout(jPanelProcessingMessageLayout);
-        jPanelProcessingMessageLayout.setHorizontalGroup(
-            jPanelProcessingMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelProcessingMessageLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelProcessingWait)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelProcessingMessageLayout.setVerticalGroup(
-            jPanelProcessingMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelProcessingMessageLayout.createSequentialGroup()
-                .addComponent(jLabelProcessingWait)
-                .addGap(0, 11, Short.MAX_VALUE))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        jPanel5_main.add(jPanelProcessingMessage, gridBagConstraints);
 
         jPanel_tab_home.add(jPanel5_main, new java.awt.GridBagConstraints());
 
@@ -664,17 +640,37 @@ public class Main extends javax.swing.JFrame {
         jTable3.setMinimumSize(null);
         jTable3.setName(""); // NOI18N
         jTable3.setPreferredSize(null);
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable3);
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+        );
+
+        jTextAreaCellDetail.setColumns(20);
+        jTextAreaCellDetail.setRows(5);
+        jScrollPane4.setViewportView(jTextAreaCellDetail);
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4)
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
@@ -682,13 +678,18 @@ public class Main extends javax.swing.JFrame {
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGap(0, 31, Short.MAX_VALUE)
-                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 32, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel_tab_jStackTraceLayout = new javax.swing.GroupLayout(jPanel_tab_jStackTrace);
@@ -839,13 +840,10 @@ public class Main extends javax.swing.JFrame {
         graphicalViewTab(jTable2, arrData2, arrHeadings2, arrHeadingTooltips2);
         // tab-3 values
 
-        ArrayList anomaliesLogFiles = new ArrayList();
-        anomaliesLogFiles.add("Anomaly Type");
-        anomaliesLogFiles.add("Method Starting");
-        anomaliesLogFiles.add("");
-        Object[][] arrData3 = Tools.toArray(analyse.getanalysedNMethods(), (Integer) ((ArrayList) analyse.getanalysedNMethods().get(0)).size());
-        Object[] arrHeadings3 = (Object[]) anomaliesLogFiles.toArray();
+        Object[][] arrData3 = Tools.toArray(analyse.getAnalysedJST(), (Integer) ((ArrayList) analyse.getAnalysedJST().get(0)).size());
+        Object[] arrHeadings3 = (Object[]) analyse.getLogFiles().toArray();
         Object[] arrHeadingTooltips3 = (Object[]) analyse.getLogFiles().toArray();
+          
         graphicalViewTab(jTable3, arrData3, arrHeadings3, arrHeadingTooltips3);
         // tab-4 code flow compare graph
 
@@ -1013,6 +1011,20 @@ public class Main extends javax.swing.JFrame {
         splitPaneSplitRefresh();
     }//GEN-LAST:event_jTabbedPaneMainStateChanged
 
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        // TODO add your handling code here:
+        
+            int row = jTable3.rowAtPoint(evt.getPoint());
+            int col = jTable3.columnAtPoint(evt.getPoint());
+            jTextAreaCellDetail.setText("");
+            String value = "";
+            try {
+                value = jTable3.getModel().getValueAt(row, col).toString();
+                jTextAreaCellDetail.setText(value);
+            }
+            catch (Exception ex) {}
+    }//GEN-LAST:event_jTable3MouseClicked
+
     private void graphicalViewTab(JTable jTableObj, Object[][] arrData, Object[] arrHeadings, Object[] arrHeadingTooltips) {
         // jPanel_Tab_TabularGraphicView.setEnabled(true);   
         DefaultTableModel model = new DefaultTableModel(arrData, arrHeadings) {
@@ -1042,7 +1054,7 @@ public class Main extends javax.swing.JFrame {
         jTabbedPaneMain.setEnabledAt(3, false);
         jTabbedPaneMain.setEnabledAt(4, false);
         setLocationRelativeTo(null);
-        jLabelProcessingWait.setText("                ");
+        jTextAreaCellDetail.setText("");
         
     }
 
@@ -1114,7 +1126,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelProcessingWait;
     private javax.swing.JList<String> jListLeft;
     private javax.swing.JList<String> jListRight;
     private javax.swing.JList<File> jList_listOfFiles;
@@ -1131,6 +1142,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1140,7 +1152,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JPanel jPanelProcessingMessage;
     private javax.swing.JPanel jPanel_InputForm_buttons;
     private javax.swing.JPanel jPanel_browse;
     private javax.swing.JPanel jPanel_graph_executedNumberOfTimes;
@@ -1154,6 +1165,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPaneListRight;
     private javax.swing.JSplitPane jSplitPane1;
@@ -1163,6 +1175,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTextArea jTextAreaCellDetail;
     private javax.swing.JButton resetBtn;
     // End of variables declaration//GEN-END:variables
 
