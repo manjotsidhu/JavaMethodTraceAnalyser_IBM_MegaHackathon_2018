@@ -22,8 +22,9 @@ import java.util.regex.*;
 import org.apache.commons.io.FileUtils;
 
 /**
- * Parses IBM formatted trace log and returns required data to be used for Analyser.
- * 
+ * Parses IBM formatted trace log and returns required data to be used for
+ * Analyser.
+ *
  * @author Manjot Sidhu
  */
 public class Parser {
@@ -43,16 +44,19 @@ public class Parser {
         ArrayList<String> methodTime = new ArrayList<>();
         ArrayList<String> methodText = new ArrayList<>();
         ArrayList<Integer> methodSequence = new ArrayList<>();
+        ArrayList<String> methodJStackTrace = new ArrayList<>();
 
         parsedLog.add(methodTime);
         parsedLog.add(methodText);
         parsedLog.add(methodSequence);
         parsedLog.add(eventType);
+        parsedLog.add(methodJStackTrace);
 
         //System.out.println("Parsing file: " + logFile.getAbsolutePath());
-        String log = FileUtils.readFileToString(logFile);
-
-        Pattern logPattern = Pattern.compile("(\\d+:\\d+:\\d+.\\d+)(\\s+)?([*|\\s])(\\w+)(\\s+)(\\w+)(\\.)(\\d+)(\\s+(\\w+\\s+)?(([^\\n\\r\\>\\<\\]\\[]+)?)([<>])\\s?)([^\\n\\r\\]]+)(\\n\\s+(.+))?");
+        String tempLog = FileUtils.readFileToString(logFile);
+        String log = (tempLog != null) ? tempLog.replaceAll("\\r", "") : tempLog;
+        String logRegex = "(\\d+:\\d+:\\d+.\\d+)(\\s+)?([*|\\s])(\\w+)(\\s+)(\\w+)(\\.)(\\d+)(\\s+(\\w+\\s+)?(([^\\n\\>\\<\\]\\[]+)?)([<>])\\s?)([^\\n\\]]+)(\\n\\s+(.+))?((\\n.+)(jstacktrace:)\\n(((?!((\\d+:\\d+:\\d+.\\d+)(\\s+)?([*|\\s])(\\w+)(\\s+)(\\w+)(\\.)(\\d+)(\\s+(\\w+\\s+)?(([^\\n\\>\\<\\]\\[]+)?)([<>])\\s?)))(.+)[\\n])+))?";
+        Pattern logPattern = Pattern.compile(logRegex);
         Matcher logMatcher = logPattern.matcher(log);
 
         int methodId = 0;
@@ -69,6 +73,8 @@ public class Parser {
                     methodId++;
                     BufferId.add(methodId);
                     methodSequence.add(methodId);
+                    String jstacktrace = (logMatcher.group(20) != null) ? logMatcher.group(20).replaceAll("(.+)(\\[\\d+\\](.+))", "$2") : logMatcher.group(20);
+                    methodJStackTrace.add(jstacktrace);
                     //System.out.println("Found method, " + methodText.get(methodText.size() - 1)
                     //        + " assigning method id: " + methodId);
                     break;
@@ -81,7 +87,7 @@ public class Parser {
 
         }
         //System.out.println("Methods found " + (int) (methodId));
-        //System.out.println(methodSequence.toString());
+        //System.out.println(methodJStackTrace.toString());
         return parsedLog;
     }
 
