@@ -26,6 +26,8 @@ Sample Log Files that can be tested are located in `Sample_logs` folder.
 
 Executable project JAR file with included dependencies: `MethodTraceAnalyser_JavaMonks.jar`
 
+Working Video has been included inside `Documentation` folder
+
 ## Running the Project
 `MethodTraceAnalyser_JavaMonks.jar` is available in the project root directory, we can simply download and run this executable jar file using the command:-
 ```
