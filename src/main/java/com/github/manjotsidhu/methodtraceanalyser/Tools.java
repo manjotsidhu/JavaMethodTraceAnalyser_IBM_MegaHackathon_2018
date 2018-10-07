@@ -101,16 +101,6 @@ public class Tools {
         }
         return count;
     }
-    
-    public static int count(ArrayList<Integer> arr, Integer element) {
-        int count = 0;
-        for (int iteration = 0; iteration < arr.size(); iteration++) {
-            if (arr.get(iteration).equals(element)) {
-                count++;
-            }
-        }
-        return count;
-    }
 
     /**
      * removeDuplicates simply removes duplicate elements from the given array
