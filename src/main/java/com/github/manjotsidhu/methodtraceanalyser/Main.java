@@ -62,6 +62,7 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jLabel11 = new javax.swing.JLabel();
         GUI_main_panel = new javax.swing.JPanel();
         jTabbedPaneMain = new javax.swing.JTabbedPane();
         jPanel_tab_home = new javax.swing.JPanel();
@@ -82,6 +83,8 @@ public class Main extends javax.swing.JFrame {
         jPanel_InputForm_buttons = new javax.swing.JPanel();
         resetBtn = new javax.swing.JButton();
         analyseBtn = new javax.swing.JButton();
+        jPanelProcessingMessage = new javax.swing.JPanel();
+        jLabelProcessingWait = new javax.swing.JLabel();
         jPanel_tab_CodeFlowGraphicalview = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPaneListRight = new javax.swing.JScrollPane();
@@ -114,7 +117,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jPanel_graph_executedNumberOfTimes = new javax.swing.JPanel();
-        jPanel_tab_Anomalies = new javax.swing.JPanel();
+        jPanel_tab_jStackTrace = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
@@ -127,6 +130,8 @@ public class Main extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         GUI_bottom_text = new javax.swing.JLabel();
+
+        jLabel11.setText("jLabel11");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Method Trace Analyser");
@@ -343,6 +348,31 @@ public class Main extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         jPanel5_main.add(jPanel_InputForm_buttons, gridBagConstraints);
 
+        jLabelProcessingWait.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelProcessingWait.setForeground(new java.awt.Color(255, 51, 51));
+        jLabelProcessingWait.setText("Processing....please wait for few seconds...");
+
+        javax.swing.GroupLayout jPanelProcessingMessageLayout = new javax.swing.GroupLayout(jPanelProcessingMessage);
+        jPanelProcessingMessage.setLayout(jPanelProcessingMessageLayout);
+        jPanelProcessingMessageLayout.setHorizontalGroup(
+            jPanelProcessingMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelProcessingMessageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelProcessingWait)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelProcessingMessageLayout.setVerticalGroup(
+            jPanelProcessingMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelProcessingMessageLayout.createSequentialGroup()
+                .addComponent(jLabelProcessingWait)
+                .addGap(0, 11, Short.MAX_VALUE))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        jPanel5_main.add(jPanelProcessingMessage, gridBagConstraints);
+
         jPanel_tab_home.add(jPanel5_main, new java.awt.GridBagConstraints());
 
         jTabbedPaneMain.addTab("Input trace logs", jPanel_tab_home);
@@ -394,7 +424,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel_tab_CodeFlowGraphicalviewLayout.createSequentialGroup()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
                         .addComponent(jScrollPaneListRight, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel_tab_CodeFlowGraphicalviewLayout.createSequentialGroup()
@@ -455,7 +485,7 @@ public class Main extends javax.swing.JFrame {
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,7 +498,7 @@ public class Main extends javax.swing.JFrame {
         jPanel_graph_timeInvocation.setLayout(jPanel_graph_timeInvocationLayout);
         jPanel_graph_timeInvocationLayout.setHorizontalGroup(
             jPanel_graph_timeInvocationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+            .addGap(0, 708, Short.MAX_VALUE)
         );
         jPanel_graph_timeInvocationLayout.setVerticalGroup(
             jPanel_graph_timeInvocationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -547,7 +577,7 @@ public class Main extends javax.swing.JFrame {
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -560,7 +590,7 @@ public class Main extends javax.swing.JFrame {
         jPanel_graph_executedNumberOfTimes.setLayout(jPanel_graph_executedNumberOfTimesLayout);
         jPanel_graph_executedNumberOfTimesLayout.setHorizontalGroup(
             jPanel_graph_executedNumberOfTimesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+            .addGap(0, 708, Short.MAX_VALUE)
         );
         jPanel_graph_executedNumberOfTimesLayout.setVerticalGroup(
             jPanel_graph_executedNumberOfTimesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -605,13 +635,13 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPaneMain.addTab("Method executed number of times", jPanel_tab_MethodExecutionNumberOfTimes);
 
-        jPanel_tab_Anomalies.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel_tab_jStackTrace.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel7.setText("Anomalies");
+        jLabel7.setText("jStackTrace");
         jPanel16.add(jLabel7);
 
-        jLabel8.setText("Showing anomalies");
+        jLabel8.setText("Showing jStackTrace entries for each log");
         jPanel17.add(jLabel8);
 
         jPanel18.setMaximumSize(null);
@@ -651,26 +681,26 @@ public class Main extends javax.swing.JFrame {
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
+                .addGap(0, 31, Short.MAX_VALUE)
                 .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel_tab_AnomaliesLayout = new javax.swing.GroupLayout(jPanel_tab_Anomalies);
-        jPanel_tab_Anomalies.setLayout(jPanel_tab_AnomaliesLayout);
-        jPanel_tab_AnomaliesLayout.setHorizontalGroup(
-            jPanel_tab_AnomaliesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel_tab_jStackTraceLayout = new javax.swing.GroupLayout(jPanel_tab_jStackTrace);
+        jPanel_tab_jStackTrace.setLayout(jPanel_tab_jStackTraceLayout);
+        jPanel_tab_jStackTraceLayout.setHorizontalGroup(
+            jPanel_tab_jStackTraceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel_tab_AnomaliesLayout.setVerticalGroup(
-            jPanel_tab_AnomaliesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_tab_AnomaliesLayout.createSequentialGroup()
+        jPanel_tab_jStackTraceLayout.setVerticalGroup(
+            jPanel_tab_jStackTraceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_tab_jStackTraceLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -680,7 +710,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPaneMain.addTab("Anomalies", jPanel_tab_Anomalies);
+        jTabbedPaneMain.addTab("jStackTrace", jPanel_tab_jStackTrace);
 
         GUI_main_panel.add(jTabbedPaneMain, java.awt.BorderLayout.CENTER);
 
@@ -752,7 +782,17 @@ public class Main extends javax.swing.JFrame {
 
     private void analyseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analyseBtnActionPerformed
         try {
+            
+            //this.add(BorderLayout.CENTER, dlg);
+            jLabelProcessingWait.setText("Processing..plese wait for few seconds..");
+            //this.doLayout();
+            //this.getContentPane().validate();
             analyse = new Analyser(logFiles);
+            Thread.sleep(2000);
+ 
+            jLabelProcessingWait.setText("");
+            //this.getContentPane().validate();
+           // JDialog_Processing.
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1002,6 +1042,8 @@ public class Main extends javax.swing.JFrame {
         jTabbedPaneMain.setEnabledAt(3, false);
         jTabbedPaneMain.setEnabledAt(4, false);
         setLocationRelativeTo(null);
+        jLabelProcessingWait.setText("                ");
+        
     }
 
     private void updateFormOnFilesSelected() {
@@ -1013,6 +1055,7 @@ public class Main extends javax.swing.JFrame {
         browseBtn.setEnabled(false);
         jPanel_browse.setVisible(false);
         splitPaneSplitRefresh();
+        
     }
 
     /**
@@ -1060,6 +1103,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton browseBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel1Right;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel2_text;
@@ -1070,6 +1114,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelProcessingWait;
     private javax.swing.JList<String> jListLeft;
     private javax.swing.JList<String> jListRight;
     private javax.swing.JList<File> jList_listOfFiles;
@@ -1095,16 +1140,17 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanelProcessingMessage;
     private javax.swing.JPanel jPanel_InputForm_buttons;
     private javax.swing.JPanel jPanel_browse;
     private javax.swing.JPanel jPanel_graph_executedNumberOfTimes;
     private javax.swing.JPanel jPanel_graph_timeInvocation;
     private javax.swing.JPanel jPanel_listing_files;
-    private javax.swing.JPanel jPanel_tab_Anomalies;
     private javax.swing.JPanel jPanel_tab_CodeFlowGraphicalview;
     private javax.swing.JPanel jPanel_tab_MethodExecutionNumberOfTimes;
     private javax.swing.JPanel jPanel_tab_MethodTimeInvocation;
     private javax.swing.JPanel jPanel_tab_home;
+    private javax.swing.JPanel jPanel_tab_jStackTrace;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
