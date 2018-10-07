@@ -88,7 +88,7 @@ public class Parser {
             }
 
         }
-        System.out.println("Methods found " + (int) (methodId));
+        //System.out.println("Methods found " + (int) (methodId));
         //System.out.println(methodJStackTrace.toString());
         return parsedLog;
     }
