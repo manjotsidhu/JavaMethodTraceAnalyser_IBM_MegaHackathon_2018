@@ -55,6 +55,7 @@ public class Parser {
         //System.out.println("Parsing file: " + logFile.getAbsolutePath());
         String tempLog = FileUtils.readFileToString(logFile);
         String log = (tempLog != null) ? tempLog.replaceAll("\\r", "") : tempLog;
+        // javascript version 
         String logRegex = "(\\d+:\\d+:\\d+.\\d+)(\\s+)?([*|\\s])(\\w+)(\\s+)(\\w+)(\\.)(\\d+)(\\s+(\\w+\\s+)?(([^\\n\\>\\<\\]\\[]+)?)([<>])\\s?)([^\\n\\]]+)(\\n\\s+(.+))?((\\n.+)(jstacktrace:)\\n(((?!((\\d+:\\d+:\\d+.\\d+)(\\s+)?([*|\\s])(\\w+)(\\s+)(\\w+)(\\.)(\\d+)(\\s+(\\w+\\s+)?(([^\\n\\>\\<\\]\\[]+)?)([<>])\\s?)))(.+)[\\n])+))?";
         Pattern logPattern = Pattern.compile(logRegex);
         Matcher logMatcher = logPattern.matcher(log);

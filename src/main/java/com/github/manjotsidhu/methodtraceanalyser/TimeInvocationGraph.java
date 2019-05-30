@@ -12,7 +12,7 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
- * Renders Graph for number of methods executed for each log file
+ * Renders Graph for time taken by each method to execute.
  * 
  * @author Manjot Sidhu
  */

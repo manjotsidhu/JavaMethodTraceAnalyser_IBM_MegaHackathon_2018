@@ -135,7 +135,7 @@ public class Analyser {
     /**
      * 
      */
-    public void analyseJStackTrace(ArrayList<String> parsedJST, ArrayList parsedSequence, ArrayList parsedText, int nMethods, boolean firstItr) {
+    private void analyseJStackTrace(ArrayList<String> parsedJST, ArrayList parsedSequence, ArrayList parsedText, int nMethods, boolean firstItr) {
         ArrayList results = new ArrayList();
         ArrayList<String> methodNames = analysedTimeMethods;
         

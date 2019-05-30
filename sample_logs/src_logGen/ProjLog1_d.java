@@ -27,7 +27,8 @@ import com.ibm.jvm.Trace;
  * $ java com.ibm.jvm.TraceFormat ProjLog1_d.trc ProjLog1_d.fmt
  * 
  * @author Manjot Sidhu
- */public class ProjLog1_d {
+ */
+ public class ProjLog1_d {
 
     static int handle;
     static String[] templates;
